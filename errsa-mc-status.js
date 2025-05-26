@@ -1,7 +1,7 @@
 // errsa-mc-status.js
 
 ;(function(){
-  const API = 'https://api.mcsrvstat.us/2/mc.errsa.erau.edu';
+  const API = 'https://api.mcsrvstat.us/2/errsa.mc.gg';
   const statusEl  = document.getElementById('status');
   const playersEl = document.getElementById('players');
 
@@ -17,7 +17,7 @@
     });
 
   window.copyIP = function(){
-    navigator.clipboard.writeText('mc.errsa.erau.edu')
+    navigator.clipboard.writeText('errsa.mc.gg')
       .then(_=> alert('Server IP copied!'))
       .catch(e=> alert('Copy failed: '+e.message));
   };

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+   /* Minecraft-themed styling */
+#mc-status {
+  background: linear-gradient(to bottom, #78AB46 0%, #4E7A2F 100%);
+  border: 4px solid #7F5833;
+  padding: 16px;
+  font-family: 'Courier New', monospace;
+  color: #FFF;
+  text-align: center;
+  max-width: 400px;
+  margin: 1em auto;
+  box-shadow: 0 0 0 4px #7F5833, 0 0 0 6px #4E7A2F;
+}
+#mc-status h2 {
+  font-size: 1.4em;
+  margin-bottom: 0.5em;
+  text-shadow: 2px 2px #000;
+}
+#mc-status p {
+  margin: 0.3em 0;
+}
+#mc-status code {
+  background: rgba(0,0,0,0.3);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+.status-dot {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+#copy-ip-btn {
+  background: #8B4513;
+  color: #FFF;
+  border: 2px solid #000;
+  padding: 8px 12px;
+  font-family: monospace;
+  cursor: pointer;
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+#copy-ip-btn:hover {
+  background: #A0522D;
+}
+
+  </style>
+</head>
+<body>
+<div id="mc-status">
+  <h2>⛏️ ERRSA Minecraft Server</h2>
+  <p><strong>IP:</strong> <code>errsa.mc.gg</code></p>
+  <p>
+    <strong>Status:</strong>
+    <span class="status-dot" id="status-dot"></span>
+    <span id="status">Loading…</span>
+  </p>
+  <p><strong>Players:</strong> <span id="players">–</span></p>
+  <button id="copy-ip-btn" onclick="copyIP()">Copy IP</button>
+</div>
+
+  <div id="mc-status">…</div>
+
+  <script>
+    // only run on /errsa/craft
+
+function copyIP() {
+  navigator.clipboard.writeText('errsa.mc.gg')
+    .then(() => alert('Server IP copied!'))
+    .catch(() => alert('Copy failed'));
+}
+
+function updateStatus() {
+  const statusEl  = document.getElementById('status');
+  const playersEl = document.getElementById('players');
+  const dot       = document.getElementById('status-dot');
+  if (!statusEl || !playersEl) return;
+
+  fetch('https://api.mcsrvstat.us/2/errsa.mc.gg')
+    .then(res => {
+      if (!res.ok) throw new Error(res.status);
+      return res.json();
+    })
+    .then(data => {
+      statusEl.textContent  = data.online ? 'Online' : 'Offline';
+      playersEl.textContent = `${data.players.online} / ${data.players.max}`;
+      if (dot) dot.style.backgroundColor = data.online ? '#0f0' : '#f00';
+    })
+    .catch(err => {
+      console.error('ERRSA MC fetch failed:', err);
+      statusEl.textContent  = 'Error';
+      playersEl.textContent = '–';
+      if (dot) dot.style.backgroundColor = '#888';
+    });
+}
+
+// initial load + refresh every 60s
+updateStatus();
+setInterval(updateStatus, 60 * 1000);
+
+  </script>
+</body>
+</html>
+

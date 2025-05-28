@@ -259,6 +259,71 @@ body.minecraft-page {
   text-decoration: underline;
 }
 
+/* ==== Support & Ranks ==== */
+#support-ranks {
+  padding: 2rem;
+}
+#support-ranks h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+}
+
+/* Price line */
+#support-ranks .price {
+  font-size: 1.1rem;
+  margin: 0 0 1rem;
+  color: var(--text-light);
+}
+#support-ranks .price strong {
+  color: #FFD700; /* highlight price in gold */
+}
+
+/* Benefits list */
+#support-ranks .benefits {
+  list-style-type: disc;
+  margin: 0 0 1.5rem 1.2rem;
+  padding: 0;
+}
+#support-ranks .benefits li {
+  color: var(--text-light);
+  margin-bottom: 0.75rem;
+}
+#support-ranks .benefits li::marker {
+  color: var(--text-light);
+}
+#support-ranks .benefits li strong {
+  color: var(--brand-blue);
+}
+
+/* VIP button */
+#support-ranks .btn.vip-btn {
+  padding: 0.75rem 1.5rem;
+  background: #FFD700;
+  color: #121212;
+  font-weight: bold;
+  border-radius: 4px;
+  text-decoration: none;
+  animation: pulse 2s infinite;
+}
+
+/* Keep the card’s fade-in and shine */
+.rank-card.vip {
+  animation: fadeInUp 0.6s ease forwards;
+}
+.rank-card.vip:hover::before {
+  animation: shine 1.2s forwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ranks-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 /* ==== Other Sections ==== */
 section {
   padding: 2rem;

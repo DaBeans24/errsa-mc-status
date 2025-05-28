@@ -16,7 +16,7 @@
   padding: 0;
 }
 
-/* ==== Body ==== */
+/* ==== Body & Global Layout ==== */
 body {
   font-family: var(--font-sans);
   line-height: 1.5;
@@ -28,36 +28,41 @@ body.minecraft-page {
   color: var(--text-light);
 }
 
+/* Uniform section spacing and max-width */
+section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 /* ==== Hero Section ==== */
 .hero {
   display: flex;
-  width: 100%;
-  height: 500px;
+  align-items: center;
+  min-height: 75vh;
   overflow: hidden;
 }
 .hero-text {
-  flex: 1;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: linear-gradient(to right, var(--bg-dark), rgba(18,18,18,0));
+  max-width: 500px;
+  margin: 0 2rem;
   color: var(--text-light);
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
 }
 .hero-text h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  line-height: 1.15;
 }
 .hero-text .tagline {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  opacity: 0.9;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.85;
 }
 .hero-image {
   flex: 1;
   background-size: cover;
   background-position: center;
+  filter: brightness(0.75);
 }
 
 /* ==== Server Status & Player Count ==== */
@@ -76,8 +81,8 @@ body.minecraft-page {
   animation: blink 1.5s step-start infinite;
 }
 @keyframes blink {
-  0%, 50%, 100% { opacity: 1; }
-  25%, 75%      { opacity: 0; }
+  0%,50%,100% { opacity: 1; }
+  25%,75%     { opacity: 0; }
 }
 .status-text {
   font-weight: 500;
@@ -118,16 +123,18 @@ body.minecraft-page {
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
 }
 
-/* ==== Builds Slider ==== */
+/* ==== Community Builds Slider ==== */
 #builds-slider {
-  padding: 2rem;
+  padding-top: 0;
+  padding-bottom: 3rem;
 }
 .slider {
   position: relative;
   overflow: hidden;
 }
 .slider-window {
-  overflow: hidden;
+  overflow: hidden !important;
+  height: 300px !important;
 }
 .slider-track {
   display: flex;
@@ -135,18 +142,29 @@ body.minecraft-page {
 }
 .slide {
   flex: 0 0 calc(100% / 3);
+  box-sizing: border-box;
   padding: 0.5rem;
-  text-align: center;
+  position: relative;
+  height: 100% !important;
+  overflow: hidden;
 }
 .slide img {
-  width: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
   border-radius: 4px;
   display: block;
 }
 .caption {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.5);
   color: var(--text-light);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.9rem;
+  border-radius: 3px;
 }
 .slider-btn {
   position: absolute;
@@ -159,15 +177,12 @@ body.minecraft-page {
   width: 2.5rem;
   height: 2.5rem;
   cursor: pointer;
-  z-index: 1;
+  z-index: 10;
 }
 .slider-btn.prev { left: 0.5rem; }
 .slider-btn.next { right: 0.5rem; }
 
 /* ==== Latest Updates ==== */
-#events-updates {
-  padding: 2rem;
-}
 #events-updates h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
@@ -199,9 +214,6 @@ body.minecraft-page {
 }
 
 /* ==== Discord & Support ==== */
-#discord-support {
-  padding: 2rem;
-}
 #discord-support .btn {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -274,14 +286,16 @@ body.minecraft-page {
 #staff-detail a { color: var(--brand-blue); text-decoration: underline; }
 
 /* ==== Support & Ranks ==== */
-#support-ranks {
-  padding: 2rem;
-}
 #support-ranks h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: var(--text-light);
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+}
+.ranks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 1.5rem;
 }
 .rank-card {
   background: #1a1a1a;
@@ -293,18 +307,12 @@ body.minecraft-page {
   animation: fadeInUp 0.6s ease forwards;
   opacity: 0;
 }
-/* shine effect */
+/* Gold shine */
 .rank-card.vip::before {
   content: '';
-  position: absolute;
-  top: 0; left: -75%;
+  position: absolute; top: 0; left: -75%;
   width: 50%; height: 100%;
-  background: linear-gradient(
-    120deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.2) 50%,
-    rgba(255,255,255,0) 100%
-  );
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
   transform: skewX(-25deg);
 }
 .rank-card.vip:hover::before {
@@ -314,39 +322,26 @@ body.minecraft-page {
   from { left: -75%; }
   to   { left: 150%; }
 }
-
 /* Price line */
-#support-ranks .price {
+.price {
   font-size: 1.1rem;
   margin: 0 0 1rem;
   color: var(--text-light);
 }
-#support-ranks .price strong {
-  color: var(--gold);
-}
-
-/* Benefits list */
-#support-ranks .benefits {
+.price strong { color: var(--gold); }
+/* Benefits */
+.benefits {
   list-style: disc;
   margin: 0 0 1.5rem 1.2rem;
   padding: 0;
 }
-#support-ranks .benefits li {
+.benefits li {
   color: var(--text-light);
   margin-bottom: 0.75rem;
 }
-#support-ranks .benefits li::marker {
-  color: var(--text-light);
-}
-#support-ranks .benefits li strong {
-  color: var(--brand-blue);
-}
-
-/* VIP button highlight */
-@keyframes pulse {
-  0%,100% { box-shadow: 0 0 0 0 rgba(255,223,0,0.7); }
-  50%     { box-shadow: 0 0 10px 10px rgba(255,223,0,0.3); }
-}
+.benefits li::marker { color: var(--text-light); }
+.benefits li strong { color: var(--brand-blue); }
+/* VIP button */
 .vip-btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -357,11 +352,19 @@ body.minecraft-page {
   font-weight: bold;
   animation: pulse 2s infinite;
 }
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,223,0,0.7); }
+  50%     { box-shadow: 0 0 10px 10px rgba(255,223,0,0.3); }
+}
 
 /* ==== Responsive ==== */
 @media (max-width: 768px) {
   .slide { flex: 0 0 100%; }
   .team-grid { grid-template-columns: repeat(auto-fit, minmax(100px,1fr)); }
-  .ranks-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  .ranks-grid { grid-template-columns: 1fr; }
+  .slider-window { height: 200px !important; max-height: 200px !important; }
 }
-
+/* Make the “VIP” heading gold */
+#support-ranks .rank-card.vip h3 {
+  color: var(--gold) !important;
+}

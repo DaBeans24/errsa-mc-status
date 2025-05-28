@@ -374,3 +374,31 @@ section {
     height: 200px;
   }
 }
+/* Make the “VIP” heading gold */
+#support-ranks .rank-card.vip h3 {
+  color: var(--gold) !important;
+}
+/* ==== Hero: Left-align text, keep image full-width ==== */
+.hero {
+  display: flex;
+  justify-content: flex-start;  /* align children to the left */
+  align-items: stretch;         /* fill full height, don’t vertically center */
+  height: 500px;
+  overflow: hidden;
+}
+
+.hero-text {
+  flex: 1 1 50%;                /* take up half the width */
+  text-align: left;             /* ensure left-aligned text */
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;      /* vertically center the text within its panel */
+}
+
+.hero-image {
+  flex: 1 1 50%;                /* take up the other half */
+  background-size: cover;
+  background-position: center;
+  filter: none;                 /* full brightness */
+}

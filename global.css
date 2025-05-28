@@ -199,6 +199,66 @@ body.minecraft-page {
   line-height: 1.4;
 }
 
+/* ==== Meet the Team Cards & Detail Panel ==== */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+  gap: 1rem;
+}
+.staff-card {
+  background: #1f1f1f;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.staff-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
+.staff-card .skin {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+#staff-detail {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  background: #121212;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 300px;
+  color: var(--text-light);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+  z-index: 100;
+}
+#staff-detail.hidden { display: none; }
+#staff-detail #close-detail {
+  position: absolute;
+  top: 0.5rem; right: 0.5rem;
+  background: transparent;
+  border: none;
+  color: #eee;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+#staff-detail img {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+#staff-detail h3 {
+  margin: 0.5rem 0;
+}
+#staff-detail a {
+  color: var(--brand-blue);
+  text-decoration: underline;
+}
+
 /* ==== Other Sections ==== */
 section {
   padding: 2rem;
@@ -216,12 +276,11 @@ section {
   .slide {
     flex: 0 0 100%;
   }
-  .gallery img {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
   #events-updates .update-item {
     padding: 0.75rem 1rem;
+  }
+  .staff-card {
+    padding: 0.75rem;
   }
 }
 

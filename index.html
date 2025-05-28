@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ERRSA Minecraft Server</title>
+  <link rel="stylesheet" href="./global.css" />
+</head>
+<body class="minecraft-page">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>The ERRSA Minecraft Server</h1>
+      <p class="tagline">Play, explore, and build together with the ERAU campus</p>
+      <div class="status">
+        <span class="status-dot"></span>
+        <span class="status-text">Loading…</span>
+      </div>
+      <div class="stats">
+        <span class="players">Players: – / –</span>
+        <div class="ip-box">
+          <input id="server-ip" readonly value="errsa.mc.gg" />
+          <button id="copy-ip">Copy IP</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image"></div>
+  </section>
+
+  <!-- Maps & Builds -->
+  <section id="maps-screenshots">
+    <h2>Maps & Builds</h2>
+    <iframe src="https://dynmap.errsa.mc.gg/" frameborder="0"></iframe>
+    <div class="gallery">
+      <img src="build1.jpg" alt="Community Castle" />
+      <img src="build2.jpg" alt="Skybridge" />
+      <!-- more images -->
+    </div>
+  </section>
+
+  <!-- Events & Updates -->
+  <section id="events-updates">
+    <h2>Events & News</h2>
+    <ul>
+      <li><strong>May 30:</strong> Build Contest kicks off</li>
+      <li><strong>June 5:</strong> Server 1.20 Update live</li>
+    </ul>
+  </section>
+
+  <!-- Discord & Support -->
+  <section id="discord-support">
+    <h2>Discord & Support</h2>
+    <p>Join our community on Discord for real-time help, FAQs, and voice chat:</p>
+    <a class="btn" href="https://discord.gg/your-invite">Join Discord</a>
+    <h3>Quick FAQs</h3>
+    <details>
+      <summary>Why can’t I connect?</summary>
+      <p>Make sure you’re on version 1.20.2 and have whitelisted...</p>
+    </details>
+    <details>
+      <summary>How do I claim land?</summary>
+      <p>Use <code>/claimcreate &lt;name&gt;</code> then <code>/claimsell</code>...</p>
+    </details>
+  </section>
+
+  <!-- Staff & Community -->
+  <section id="staff-community">
+    <h2>Meet the Team</h2>
+    <div class="team-grid">
+      <div class="staff-card">
+        <img src="mod-avatar.png" alt="Mod Name" />
+        <h3>ModName</h3>
+        <p>Moderator</p>
+        <a href="https://discord.gg/..." target="_blank">@ModDiscord</a>
+      </div>
+      <!-- more staff cards -->
+    </div>
+    <p class="community-links">
+      <a href="/forums">Forums</a> &middot;
+      <a href="https://reddit.com/r/ERRSA" target="_blank">Reddit</a>
+    </p>
+  </section>
+
+  <!-- Donate & Ranks -->
+  <section id="donate-ranks">
+    <h2>Support & Ranks</h2>
+    <div class="ranks-grid">
+      <div class="rank-card">
+        <h3>Builder</h3>
+        <p>$5/month</p>
+        <ul>
+          <li>Extra claim blocks</li>
+          <li>Custom chat color</li>
+        </ul>
+        <a class="btn" href="/donate?tier=builder">Get Builder</a>
+      </div>
+      <!-- more tiers -->
+    </div>
+  </section>
+
+  <script src="./embed.js"></script>
+</body>
+</html>

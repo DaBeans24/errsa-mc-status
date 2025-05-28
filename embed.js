@@ -1,14 +1,16 @@
-// Copy-IP button
+// embed.js
+
+// Copy IP functionality
 document.getElementById('copy-ip').addEventListener('click', () => {
   const ip = document.getElementById('server-ip');
   navigator.clipboard.writeText(ip.value).then(() => {
     const orig = ip.value;
     ip.value = 'Copied!';
-    setTimeout(() => (ip.value = orig), 1000);
+    setTimeout(() => ip.value = orig, 1000);
   });
 });
 
-// Server status fetch
+// Fetch live server status & player count
 document.addEventListener('DOMContentLoaded', () => {
   const dot    = document.querySelector('.status-dot');
   const txt    = document.querySelector('.status-text');
@@ -17,12 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function updateStatus() {
     try {
-      const r = await fetch(API);
-      const j = await r.json();
-      dot.style.backgroundColor = j.online ? '#0f0' : '#f00';
-      txt.textContent           = j.online ? 'Online' : 'Offline';
-      span.textContent          = `Players: ${j.players?.online||0} / ${j.players?.max||'–'}`;
-    } catch {
+      const res = await fetch(API);
+      if (!res.ok) throw new Error(`Status fetch failed: ${res.status}`);
+      const data = await res.json();
+
+      dot.style.backgroundColor = data.online ? '#0f0' : '#f00';
+      txt.textContent           = data.online ? 'Online' : 'Offline';
+      span.textContent          = `Players: ${data.players?.online || 0} / ${data.players?.max || '–'}`;
+    } catch (err) {
+      console.error(err);
       dot.style.backgroundColor = '#aaa';
       txt.textContent           = 'Unknown';
       span.textContent          = 'Players: – / –';
@@ -33,35 +38,37 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateStatus, 60000);
 });
 
+// Builds slider functionality
 document.addEventListener('DOMContentLoaded', () => {
-  const track     = document.querySelector('.slider-track');
-  const slides    = Array.from(track.children);
-  const prevBtn   = document.querySelector('.slider-btn.prev');
-  const nextBtn   = document.querySelector('.slider-btn.next');
-  let current     = 0;
-  const visible   = window.innerWidth < 768 ? 1 : 3;
-  const maxIndex  = slides.length - visible;
+  const track   = document.querySelector('.slider-track');
+  const slides  = Array.from(track.children);
+  const prevBtn = document.querySelector('.slider-btn.prev');
+  const nextBtn = document.querySelector('.slider-btn.next');
+  let current   = 0;
+  const visible = window.innerWidth < 768 ? 1 : 3;
+  const maxIdx  = slides.length - visible;
 
   function updateButtons() {
     prevBtn.disabled = current === 0;
-    nextBtn.disabled = current >= maxIndex;
+    nextBtn.disabled = current >= maxIdx;
   }
 
-  function moveTo(index) {
+  function moveTo(idx) {
     const slideWidth = slides[0].getBoundingClientRect().width;
-    track.style.transform = `translateX(-${slideWidth * index}px)`;
-    current = index;
+    track.style.transform = `translateX(-${slideWidth * idx}px)`;
+    current = idx;
     updateButtons();
   }
 
   prevBtn.addEventListener('click', () => {
     moveTo(Math.max(0, current - visible));
   });
+
   nextBtn.addEventListener('click', () => {
-    moveTo(Math.min(maxIndex, current + visible));
+    moveTo(Math.min(maxIdx, current + visible));
   });
 
-  // init
+  // Initialize buttons state
   updateButtons();
 });
 

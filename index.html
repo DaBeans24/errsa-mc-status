@@ -124,25 +124,34 @@
     </details>
   </section>
 
-  <!-- Staff & Community -->
-  <section id="staff-community">
-    <h2>Meet the Team</h2>
-    <div class="team-grid">
-      <div class="staff-card">
-        <img
-          src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/mod-avatar.png"
-          alt="Mod Name"
-        />
-        <h3>ModName</h3>
-        <p>Moderator</p>
-        <a href="https://discord.gg/..." target="_blank">@ModDiscord</a>
-      </div>
+<section id="staff-community">
+  <h2>Meet the Team</h2>
+  <div class="team-grid">
+    <!-- For each staff member, change data-uuid, data-name, data-role, and the Discord link/text -->
+    <div class="staff-card"
+         data-uuid="069a79f4-44e9-4726-a5be-fca90e38aaf5"
+         data-name="ModName"
+         data-role="Moderator">
+      <img class="skin"
+           src="https://crafatar.com/avatars/069a79f4-44e9-4726-a5be-fca90e38aaf5?size=128&overlay"
+           alt="ModName Skin">
+      <h3>ModName</h3>
+      <p>Moderator</p>
+      <a href="https://discord.gg/..." target="_blank">@ModDiscord</a>
     </div>
-    <p class="community-links">
-      <a href="/forums">Forums</a> &middot;
-      <a href="https://reddit.com/r/ERRSA" target="_blank">Reddit</a>
-    </p>
-  </section>
+    <!-- copy/paste the above block for each staff -->
+  </div>
+
+  <!-- Hidden detail panel -->
+  <aside id="staff-detail" class="hidden">
+    <button id="close-detail">×</button>
+    <img id="detail-skin" alt="Selected Skin">
+    <h3 id="detail-name"></h3>
+    <p id="detail-role"></p>
+    <a id="detail-discord" href="#" target="_blank"></a>
+  </aside>
+</section>
+
 
   <!-- Donate & Ranks -->
   <section id="donate-ranks">

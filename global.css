@@ -8,6 +8,7 @@
   --ip-bg: rgba(255,255,255,0.2);
   --btn-bg: #a0522d;
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --gold: #FFD700;
 }
 *, *::before, *::after {
   box-sizing: border-box;
@@ -19,7 +20,7 @@
 body {
   font-family: var(--font-sans);
   line-height: 1.5;
-  background-color: #fff; /* default outside Minecraft pages */
+  background-color: #fff;
   color: #111;
 }
 body.minecraft-page {
@@ -123,12 +124,10 @@ body.minecraft-page {
 }
 .slider {
   position: relative;
-  width: 100%;
   overflow: hidden;
 }
 .slider-window {
   overflow: hidden;
-  width: 100%;
 }
 .slider-track {
   display: flex;
@@ -144,7 +143,7 @@ body.minecraft-page {
   border-radius: 4px;
   display: block;
 }
-.slide .caption {
+.caption {
   margin-top: 0.5rem;
   font-size: 0.9rem;
   color: var(--text-light);
@@ -165,7 +164,7 @@ body.minecraft-page {
 .slider-btn.prev { left: 0.5rem; }
 .slider-btn.next { right: 0.5rem; }
 
-/* ==== Events & News (Latest Updates) ==== */
+/* ==== Latest Updates ==== */
 #events-updates {
   padding: 2rem;
 }
@@ -175,31 +174,45 @@ body.minecraft-page {
   color: var(--text-light);
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
 }
-#events-updates .updates {
+.updates {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
-#events-updates .update-item {
+.update-item {
   background: #1f1f1f;
   border-radius: 6px;
   padding: 1rem 1.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
-#events-updates .update-date {
+.update-date {
   display: block;
   font-size: 1.25rem;
   font-weight: bold;
   color: var(--brand-blue);
   margin-bottom: 0.5rem;
 }
-#events-updates .update-message {
+.update-message {
   margin: 0;
   color: var(--text-light);
   line-height: 1.4;
 }
 
-/* ==== Meet the Team Cards & Detail Panel ==== */
+/* ==== Discord & Support ==== */
+#discord-support {
+  padding: 2rem;
+}
+#discord-support .btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--btn-bg);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+/* ==== Meet the Team ==== */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
@@ -212,6 +225,8 @@ body.minecraft-page {
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
 }
 .staff-card:hover {
   transform: translateY(-4px);
@@ -222,6 +237,10 @@ body.minecraft-page {
   height: 80px;
   border-radius: 50%;
   margin-bottom: 0.5rem;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 #staff-detail {
   position: fixed;
@@ -236,7 +255,7 @@ body.minecraft-page {
   z-index: 100;
 }
 #staff-detail.hidden { display: none; }
-#staff-detail #close-detail {
+#close-detail {
   position: absolute;
   top: 0.5rem; right: 0.5rem;
   background: transparent;
@@ -251,13 +270,8 @@ body.minecraft-page {
   border-radius: 50%;
   margin-bottom: 1rem;
 }
-#staff-detail h3 {
-  margin: 0.5rem 0;
-}
-#staff-detail a {
-  color: var(--brand-blue);
-  text-decoration: underline;
-}
+#staff-detail h3 { margin: 0.5rem 0; }
+#staff-detail a { color: var(--brand-blue); text-decoration: underline; }
 
 /* ==== Support & Ranks ==== */
 #support-ranks {
@@ -269,6 +283,37 @@ body.minecraft-page {
   color: var(--text-light);
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
 }
+.rank-card {
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 2px solid #333;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+/* shine effect */
+.rank-card.vip::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.2) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: skewX(-25deg);
+}
+.rank-card.vip:hover::before {
+  animation: shine 1.2s forwards;
+}
+@keyframes shine {
+  from { left: -75%; }
+  to   { left: 150%; }
+}
 
 /* Price line */
 #support-ranks .price {
@@ -277,12 +322,12 @@ body.minecraft-page {
   color: var(--text-light);
 }
 #support-ranks .price strong {
-  color: #FFD700; /* highlight price in gold */
+  color: var(--gold);
 }
 
 /* Benefits list */
 #support-ranks .benefits {
-  list-style-type: disc;
+  list-style: disc;
   margin: 0 0 1.5rem 1.2rem;
   padding: 0;
 }
@@ -297,55 +342,26 @@ body.minecraft-page {
   color: var(--brand-blue);
 }
 
-/* VIP button */
-#support-ranks .btn.vip-btn {
+/* VIP button highlight */
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,223,0,0.7); }
+  50%     { box-shadow: 0 0 10px 10px rgba(255,223,0,0.3); }
+}
+.vip-btn {
+  display: inline-block;
   padding: 0.75rem 1.5rem;
-  background: #FFD700;
+  background: var(--gold);
   color: #121212;
-  font-weight: bold;
-  border-radius: 4px;
   text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
   animation: pulse 2s infinite;
-}
-
-/* Keep the card’s fade-in and shine */
-.rank-card.vip {
-  animation: fadeInUp 0.6s ease forwards;
-}
-.rank-card.vip:hover::before {
-  animation: shine 1.2s forwards;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .ranks-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-/* ==== Other Sections ==== */
-section {
-  padding: 2rem;
 }
 
 /* ==== Responsive ==== */
 @media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-    height: auto;
-  }
-  .hero-image {
-    height: 250px;
-  }
-  .slide {
-    flex: 0 0 100%;
-  }
-  #events-updates .update-item {
-    padding: 0.75rem 1rem;
-  }
-  .staff-card {
-    padding: 0.75rem;
-  }
+  .slide { flex: 0 0 100%; }
+  .team-grid { grid-template-columns: repeat(auto-fit, minmax(100px,1fr)); }
+  .ranks-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
 }
 

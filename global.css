@@ -1,3 +1,5 @@
+/* global.css */
+
 /* ==== Variables & Reset ==== */
 :root {
   --brand-blue: #004e8a;
@@ -17,7 +19,7 @@
 body {
   font-family: var(--font-sans);
   line-height: 1.5;
-  background-color: #fff; /* default for non-MC pages */
+  background-color: #fff; /* default outside Minecraft pages */
   color: #111;
 }
 body.minecraft-page {
@@ -25,7 +27,7 @@ body.minecraft-page {
   color: var(--text-light);
 }
 
-/* ==== Hero ==== */
+/* ==== Hero Section ==== */
 .hero {
   display: flex;
   width: 100%;
@@ -51,8 +53,13 @@ body.minecraft-page {
   margin-bottom: 1.5rem;
   opacity: 0.9;
 }
+.hero-image {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+}
 
-/* ==== Status & Players ==== */
+/* ==== Server Status & Player Count ==== */
 .status {
   display: flex;
   align-items: center;
@@ -68,8 +75,8 @@ body.minecraft-page {
   animation: blink 1.5s step-start infinite;
 }
 @keyframes blink {
-  0%,50%,100% { opacity: 1; }
-  25%,75%     { opacity: 0; }
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75%      { opacity: 0; }
 }
 .status-text {
   font-weight: 500;
@@ -110,13 +117,6 @@ body.minecraft-page {
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
 }
 
-/* ==== Hero Image ==== */
-.hero-image {
-  flex: 1;
-  background-size: cover;
-  background-position: center;
-}
-
 /* ==== Other Sections ==== */
 section {
   padding: 2rem;
@@ -133,6 +133,58 @@ section {
   border-radius: 4px;
 }
 
+/* ==== Builds Slider ==== */
+#builds-slider {
+  padding: 2rem;
+}
+.slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.slider-window {
+  overflow: hidden;
+  width: 100%;
+}
+.slider-track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+.slide {
+  flex: 0 0 calc(100% / 3);
+  padding: 0.5rem;
+  text-align: center;
+}
+.slide img {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+}
+.slide .caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  z-index: 1;
+}
+.slider-btn.prev {
+  left: 0.5rem;
+}
+.slider-btn.next {
+  right: 0.5rem;
+}
+
 /* ==== Responsive ==== */
 @media (max-width: 768px) {
   .hero {
@@ -142,9 +194,13 @@ section {
   .hero-image {
     height: 250px;
   }
+  .gallery img,
+  .slide {
+    flex: 0 0 100%;
+  }
   .gallery img {
-    width: 100%;
     margin-bottom: 1rem;
   }
 }
+
 

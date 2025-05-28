@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateStatus, 60000);
 });
 
-<script>
 document.addEventListener('DOMContentLoaded', () => {
   const track     = document.querySelector('.slider-track');
   const slides    = Array.from(track.children);
@@ -65,4 +64,4 @@ document.addEventListener('DOMContentLoaded', () => {
   // init
   updateButtons();
 });
-</script>
+

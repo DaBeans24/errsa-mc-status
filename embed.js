@@ -72,3 +72,22 @@ document.addEventListener('DOMContentLoaded', () => {
   updateButtons();
 });
 
+// Show detail panel when clicking a card
+document.querySelectorAll('.staff-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const detail = document.getElementById('staff-detail');
+    document.getElementById('detail-skin').src =
+      `https://crafatar.com/renders/body/${card.dataset.uuid}?size=256&overlay`;
+    document.getElementById('detail-name').textContent = card.dataset.name;
+    document.getElementById('detail-role').textContent = card.dataset.role;
+    const dc = card.querySelector('a');
+    document.getElementById('detail-discord').textContent = dc.textContent;
+    document.getElementById('detail-discord').href = dc.href;
+    detail.classList.remove('hidden');
+  });
+});
+
+// Close the detail panel
+document.getElementById('close-detail').addEventListener('click', () => {
+  document.getElementById('staff-detail').classList.add('hidden');
+});

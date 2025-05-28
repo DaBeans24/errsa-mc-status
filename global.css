@@ -1,7 +1,5 @@
 /* global.css */
 
-/* global.css */
-
 /* ==== Variables & Reset ==== */
 :root {
   --brand-blue: #004e8a;
@@ -41,16 +39,16 @@ section {
   height: 500px;
   overflow: hidden;
 
-  /* span a bit beyond section padding to shift content left */
-  width: calc(100% + 4rem) !important;
-  margin: 0 -2rem 2rem !important;
+  /* bleed only 2rem into the left gutter, keep right flush */
+  width: calc(100% + 2rem) !important;
+  margin: 0 -2rem 2rem 0 !important;
 }
 .hero-text {
   flex: 1;
-  padding: 2rem 1rem;    /* reduced left padding for left-align */
+  padding: 2rem;              /* restored full padding */
   color: var(--text-light);
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
-  max-width: 600px;      /* keep lines readable */
+  max-width: 600px;
 }
 .hero-text h1 {
   font-size: 2.5rem;
@@ -65,6 +63,9 @@ section {
   flex: 1;
   background-size: cover;
   background-position: center;
+
+  /* add breathing room from the right edge */
+  padding-right: 2rem;
 }
 
 /* ==== Server Status & Player Count ==== */
@@ -127,7 +128,6 @@ section {
 
 /* ==== Community Builds Slider ==== */
 #builds-slider {
-  /* just a little extra bleed, for “room” at edges */
   max-width: none !important;
   width: calc(100% + 2rem) !important;
   margin: 0 -1rem !important;

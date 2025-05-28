@@ -33,3 +33,36 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateStatus, 60000);
 });
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const track     = document.querySelector('.slider-track');
+  const slides    = Array.from(track.children);
+  const prevBtn   = document.querySelector('.slider-btn.prev');
+  const nextBtn   = document.querySelector('.slider-btn.next');
+  let current     = 0;
+  const visible   = window.innerWidth < 768 ? 1 : 3;
+  const maxIndex  = slides.length - visible;
+
+  function updateButtons() {
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current >= maxIndex;
+  }
+
+  function moveTo(index) {
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    track.style.transform = `translateX(-${slideWidth * index}px)`;
+    current = index;
+    updateButtons();
+  }
+
+  prevBtn.addEventListener('click', () => {
+    moveTo(Math.max(0, current - visible));
+  });
+  nextBtn.addEventListener('click', () => {
+    moveTo(Math.min(maxIndex, current + visible));
+  });
+
+  // init
+  updateButtons();
+});
+</script>

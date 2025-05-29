@@ -1,42 +1,43 @@
 // embed.js
 
-// Copy IP functionality
-document.getElementById('copy-ip').addEventListener('click', () => {
-  const ip = document.getElementById('server-ip');
-  navigator.clipboard.writeText(ip.value).then(() => {
-    const orig = ip.value;
-    ip.value = 'Copied!';
-    setTimeout(() => ip.value = orig, 1000);
-  });
-});
+ // set hero image
+    document.getElementById("hero-img").style.backgroundImage =
+      'url("https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.png")';
 
-// Fetch live server status & player count
-document.addEventListener('DOMContentLoaded', () => {
-  const dot    = document.querySelector('.status-dot');
-  const txt    = document.querySelector('.status-text');
-  const span   = document.querySelector('.players');
-  const API    = 'https://api.mcsrvstat.us/2/errsa.mc.gg';
+    // copy IP
+    document.getElementById("copy-ip").onclick = () => {
+      const ip = document.getElementById("server-ip");
+      navigator.clipboard.writeText(ip.value).then(() => {
+        const prev = ip.value;
+        ip.value = "Copied!";
+        setTimeout(() => (ip.value = prev), 1000);
+      });
+    };
 
-  async function updateStatus() {
-    try {
-      const res = await fetch(API);
-      if (!res.ok) throw new Error(`Status fetch failed: ${res.status}`);
-      const data = await res.json();
+    // live status
+    document.addEventListener("DOMContentLoaded", () => {
+      const dot = document.querySelector(".status-dot");
+      const txt = document.querySelector(".status-text");
+      const span = document.querySelector(".players");
+      const API = "https://api.mcsrvstat.us/2/errsa.mc.gg";
 
-      dot.style.backgroundColor = data.online ? '#0f0' : '#f00';
-      txt.textContent           = data.online ? 'Online' : 'Offline';
-      span.textContent          = `Players: ${data.players?.online || 0} / ${data.players?.max || '–'}`;
-    } catch (err) {
-      console.error(err);
-      dot.style.backgroundColor = '#aaa';
-      txt.textContent           = 'Unknown';
-      span.textContent          = 'Players: – / –';
-    }
-  }
+      async function update() {
+        try {
+          const res = await fetch(API);
+          const data = await res.json();
+          dot.style.backgroundColor = data.online ? "#0f0" : "#f00";
+          txt.textContent = data.online ? "Online" : "Offline";
+          span.textContent = `Players: ${data.players?.online || 0} / ${data.players?.max || "–"}`;
+        } catch {
+          dot.style.backgroundColor = "#aaa";
+          txt.textContent = "Unknown";
+          span.textContent = "Players: – / –";
+        }
+      }
 
-  updateStatus();
-  setInterval(updateStatus, 60000);
-});
+      update();
+      setInterval(update, 60000);
+    });
 
 // Builds slider functionality
 document.addEventListener('DOMContentLoaded', () => {

@@ -32,58 +32,24 @@ section {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 /* ==== Hero Section ==== */
 .hero {
   display: flex;
   align-items: center;
   height: 500px;
   overflow: hidden;
-
-  /* bleed only 2rem into the left gutter, keep right section-padding */
+  /* bleed 2rem into left gutter, keep right flush */
   width: calc(100% + 2rem) !important;
-  margin: 0 -2rem 2rem 0 !important;
-
-  /* add a bit of padding on the right so the image never hugs the viewport */
-  padding-right: 2rem;
+  margin: 0 0 2rem -2rem !important;
+  padding-right: 2rem; /* breathing room on the right */
 }
-
 .hero-text {
-  flex: 0 0 auto;     /* only as wide as its content (up to max-width) */
+  flex: 0 0 auto;
   max-width: 600px;
   padding: 2rem;
   color: var(--text-light);
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
-}
-
-.hero-image {
-  /* Fix at half the container, then push it all the way right */
-  flex: 0 0 50%;
-  margin-left: auto;
-
-  /* Make sure your DIV has a background-image set in your HTML or inline style */
-  background-size: cover;
-  background-position: center;
-  height: 100%;      /* fill the hero height */
-}
-
-
-/* ==== Hero Section ==== */
-.hero {
-  display: flex;
-  align-items: center;
-  height: 500px;
-  overflow: hidden;
-
-  /* bleed only 2rem into the left gutter, keep right flush */
-  width: calc(100% + 2rem) !important;
-  margin: 0 -2rem 2rem 0 !important;
-}
-.hero-text {
-  flex: 1;
-  padding: 2rem;              /* restored full padding */
-  color: var(--text-light);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
-  max-width: 600px;
 }
 .hero-text h1 {
   font-size: 2.5rem;
@@ -95,12 +61,10 @@ section {
   opacity: 0.9;
 }
 .hero-image {
-  flex: 1;
-  margin-left: auto;
-
-  /* add breathing room from the right edge */
-  padding-right: 2rem;
-    background-size: cover;
+  flex: 0 0 50%;
+  margin-left: auto;    /* push to right */
+  height: 100%;
+  background-size: cover;
   background-position: center;
 }
 
@@ -164,53 +128,24 @@ section {
 
 /* ==== Community Builds Slider ==== */
 #builds-slider {
+  /* heading stays in normal flow */
+  margin: 0;
+  padding: 3rem 2rem;
+}
+#builds-slider .slider-window {
+  position: relative;
+  overflow: visible !important;      /* allow captions */
   max-width: none !important;
-  width: calc(100% + 2rem) !important;
-  margin: 0 -1rem !important;  /* bleed slides 1rem each side */
-  height: 320px;               /* extra height for captions */
-  overflow: visible;           /* don’t clip the caption */
+  width: calc(100% + 2rem) !important; 
+  margin: 0 -1rem !important;         /* bleed 1rem each side */
+  height: 320px;                      /* extra for captions */
 }
-}
-.slider {
-  position: relative;
-  overflow: hidden;
-}
-.slider-window {
-  position: relative;
-  overflow: visible;
-  
-}
-.slider-track {
+#builds-slider .slider-track {
   display: flex;
   transition: transform 0.4s ease;
   width: 100% !important;
 }
-.slide {
-  flex: 0 0 calc(100% / 3);
-  padding: 0.5rem;
-  position: relative;
-  height: 100%;
-}
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 4px;
-  display: block;
-}
-.caption {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.7);
-  color: var(--text-light);
-  padding: 0.5rem 0.75rem;
-  font-size: 1rem;
-  border-radius: 4px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
-}
-.slider-btn {
+#builds-slider .slider-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -223,8 +158,36 @@ section {
   cursor: pointer;
   z-index: 10;
 }
-.slider-btn.prev { left: 1rem; }
-.slider-btn.next { right: 1rem; }
+#builds-slider .slider-btn.prev { left: 1rem; }
+#builds-slider .slider-btn.next { right: 1rem; }
+#builds-slider .slide {
+  flex: 0 0 calc(100% / 3);
+  box-sizing: border-box;
+  padding: 0.5rem;
+  position: relative;
+  overflow: visible !important;     /* don’t clip caption */
+  height: 100%;
+}
+#builds-slider .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+#builds-slider .caption {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.7);
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  color: var(--text-light);
+  border-radius: 4px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  z-index: 5;
+}
 
 /* ==== Latest Updates ==== */
 #events-updates h2 {
@@ -288,15 +251,15 @@ section {
   transform: translateY(-4px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.6);
 }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 .staff-card .skin {
   width: 80px;
   height: 80px;
   border-radius: 50%;
   margin-bottom: 0.5rem;
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 #staff-detail {
   position: fixed;
@@ -351,11 +314,9 @@ section {
   animation: fadeInUp 0.6s ease forwards;
   opacity: 0;
 }
-/* color the “VIP” label itself gold */
 .rank-card.vip h3:first-of-type {
   color: var(--gold);
 }
-/* Gold shine */
 .rank-card.vip::before {
   content: '';
   position: absolute; top: 0; left: -75%;
@@ -370,7 +331,6 @@ section {
   from { left: -75%; }
   to   { left: 150%; }
 }
-/* Price line */
 .price {
   font-size: 1.1rem;
   margin: 0 0 1rem;
@@ -379,7 +339,6 @@ section {
 .price strong {
   color: var(--gold);
 }
-/* Benefits */
 .benefits {
   list-style: disc;
   margin: 0 0 1.5rem 1.2rem;
@@ -395,7 +354,6 @@ section {
 .benefits li strong {
   color: var(--brand-blue);
 }
-/* VIP button */
 .vip-btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -422,8 +380,7 @@ section {
   .ranks-grid {
     grid-template-columns: 1fr;
   }
-  .slider-window {
-    height: 200px;
+  #builds-slider .slider-window {
+    height: 240px;
   }
 }
-

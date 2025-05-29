@@ -1,111 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>ERRSA Minecraft Server</title>
-<style>
+  <style>
+   :root {
+  /* Spacing scale */
+  --space-base: 1rem;
+  --space-xxs: calc(var(--space-base) * 0.25);
+  --space-xs:  calc(var(--space-base) * 0.5);
+  --space-sm:  var(--space-base);
+  --space-md:  calc(var(--space-base) * 2);
+  --space-lg:  calc(var(--space-base) * 4);
+  --space-xl:  calc(var(--space-base) * 8);
 
-/* global.css */
-
-/* ==== Variables & Reset ==== */
- :root {
-      --brand-blue: #004e8a;
+  /* Color variables */
+    --brand-blue: #004e8a;
   --bg-dark: #111;
   --text-light: #eee;
   --ip-bg: rgba(255,255,255,0.2);
   --btn-bg: #a0522d;
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+ 
   --gold: #FFD700;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: var(--font-sans);
-      background: var(--bg-dark);
-      color: var(--text-light);
-    }
 
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 60vh;
-    }
-    @media (max-width: 768px) {
-      .hero { grid-template-columns: 1fr; }
-    }
-
-    .hero-text {
-      padding: 4rem 3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1rem;
-    }
-    .hero-text h1 {
-      font-size: 3rem;
-      line-height: 1.1;
-    }
-    .hero-text p {
-      font-size: 1.25rem;
-      opacity: 0.9;
-    }
-    .status {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1.1rem;
-    }
-    .status-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      background: #0f0;
-      animation: blink 1.5s step-start infinite;
-    }
-    @keyframes blink {
-      0%,50%,100% { opacity: 1; }
-      25%,75%     { opacity: 0; }
-    }
-    .players { font-size: 1rem; }
-    .ip-box {
-      display: flex;
-      gap: 0.5rem;
-    }
-    .ip-box input {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      padding: 0.5rem;
-      border-radius: 4px;
-      color: var(--text-light);
-    }
-    .ip-box button {
-      background: var(--btn-bg);
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      color: var(--text-light);
-    }
-
-    .hero-image {
-      position: relative;
-      background-size: cover;
-      background-position: center;
-    }
-    /* gradient overlay to improve text contrast */
-    .hero-image::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
-    }
-
-  /* === COMMUNITY BUILDS SLIDER === */
-#builds-slider {
-  padding-top: 5rem;
+  /* Typography */
+  --font-heading: 'Roboto', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --type-scale-ratio: 1.25;
+  --fs-base:   1.125rem;
+  --fs-sm:     calc(var(--fs-base) / var(--type-scale-ratio));
+  --fs-md:     var(--fs-base);
+  --fs-lg:     calc(var(--fs-md) * var(--type-scale-ratio));
+  --fs-xl:     calc(var(--fs-lg) * var(--type-scale-ratio));
+  --fs-2xl:    calc(var(--fs-xl) * var(--type-scale-ratio));
+  --fs-3xl:    calc(var(--fs-2xl) * var(--type-scale-ratio));
+  --lh-body:    1.6;
+  --lh-heading: 1.2;
 }
-#builds-slider .slider {
+
+/* Base typography */
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  background: var(--bg-dark);
+  color: var(--text-light);
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: var(--lh-heading);
+  letter-spacing: 0.02em;
+  margin-block-start: var(--space-lg);
+  margin-block-end: var(--space-sm);
+}
+h1 { font-size: var(--fs-3xl); }
+h2 { font-size: var(--fs-xl); }
+h3 { font-size: var(--fs-lg); }
+
+/* Layout and Components */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  min-height: 60vh;
+}
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+}
+
+.hero-text {
+  padding-block: var(--space-lg) var(--space-lg);
+  padding-inline: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+.hero-text h1 {
+  /* Use typographic scale */
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-heading);
+}
+.hero-text p {
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  max-width: 60ch;
+  opacity: 0.9;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--fs-md);
+}
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #0f0;
+  animation: blink 1.5s step-start infinite;
+}
+@keyframes blink {
+  0%,50%,100% { opacity: 1; }
+  25%,75%     { opacity: 0; }
+}
+.players { font-size: var(--fs-sm); }
+
+.ip-box {
+  display: flex;
+  gap: var(--space-xs);
+}
+.ip-box input {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  padding: var(--space-xs);
+  border-radius: 4px;
+  color: var(--text-light);
+  font-size: var(--fs-md);
+}
+.ip-box button {
+  background: var(--btn-bg);
+  border: none;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-light);
+  font-size: var(--fs-md);
+}
+
+.hero-image {
   position: relative;
+  background-size: cover;
+  background-position: center;
 }
+.hero-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
+}
+
+/* === COMMUNITY BUILDS SLIDER === */
+#builds-slider {
+  padding-top: calc(var(--space-xl) + var(--space-xs));
+}
+#builds-slider .slider { position: relative; }
 #builds-slider .slider-window {
   overflow: hidden;
   height: 320px;
@@ -121,16 +162,17 @@
   background: rgba(0,0,0,0.6);
   color: #fff;
   border: none;
-  font-size: 2rem;
-  width: 2.5rem; height: 2.5rem;
+  font-size: var(--fs-2xl);
+  width: 2.5rem;
+  height: 2.5rem;
   cursor: pointer;
   z-index: 10;
 }
-#builds-slider .slider-btn.prev { left: 0.5rem; }
-#builds-slider .slider-btn.next { right: 0.5rem; }
+#builds-slider .slider-btn.prev { left: var(--space-sm); }
+#builds-slider .slider-btn.next { right: var(--space-sm); }
 #builds-slider .slide {
   flex: 0 0 calc(100%/3);
-  padding: 0.5rem;
+  padding: var(--space-xs);
   position: relative;
 }
 #builds-slider .slide img {
@@ -141,12 +183,12 @@
 }
 #builds-slider .caption {
   position: absolute;
-  bottom: 16px;
+  bottom: var(--space-xxs);
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0,0,0,0.7);
-  padding: 0.5rem 0.75rem;
-  font-size: 1rem;
+  padding: var(--space-xxs) var(--space-sm);
+  font-size: var(--fs-sm);
   color: var(--text-light);
   border-radius: 4px;
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
@@ -156,63 +198,63 @@
   #builds-slider .slider-window { height: 240px; }
 }
 
-    /* ==== Latest Updates ==== */
+/* ==== Latest Updates ==== */
 #events-updates h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: var(--fs-xl);
+  margin-bottom: var(--space-md);
   color: var(--text-light);
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
 }
 .updates {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--space-sm);
 }
 .update-item {
   background: #1f1f1f;
   border-radius: 6px;
-  padding: 1rem 1.5rem;
+  padding: var(--space-sm) var(--space-md);
   box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 .update-date {
   display: block;
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   font-weight: bold;
   color: var(--brand-blue);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xxs);
 }
 .update-message {
   margin: 0;
   color: var(--text-light);
-  line-height: 1.4;
+  line-height: var(--lh-body);
 }
 
 /* ==== Discord & Support ==== */
 #discord-support .btn {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: var(--space-xs) var(--space-sm);
   background: var(--btn-bg);
   color: #fff;
   text-decoration: none;
   border-radius: 4px;
-  margin-top: 0.5rem;
+  margin-top: var(--space-sm);
+  font-size: var(--fs-md);
 }
 
 /* ==== Meet the Team ==== */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
-  gap: 1rem;
+  gap: var(--space-md);
 }
 .staff-card {
   background: #1f1f1f;
   border-radius: 8px;
-  padding: 1rem;
+  padding: var(--space-sm);
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
   animation: fadeInUp 0.6s ease forwards;
-  opacity: 0;
 }
 .staff-card:hover {
   transform: translateY(-4px);
@@ -226,15 +268,15 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin-bottom: 0.5rem;
+ 	margin-bottom: var(--space-sm);
 }
 #staff-detail {
   position: fixed;
   top: 50%; left: 50%;
   transform: translate(-50%,-50%);
-  background: #121212;
+ 	background: #121212;
   border-radius: 8px;
-  padding: 2rem;
+  padding: var(--space-lg);
   width: 300px;
   color: var(--text-light);
   box-shadow: 0 8px 16px rgba(0,0,0,0.8);
@@ -243,7 +285,7 @@
 #staff-detail.hidden { display: none; }
 #close-detail {
   position: absolute;
-  top: 0.5rem; right: 0.5rem;
+  top: var(--space-xs); right: var(--space-xs);
   background: transparent;
   border: none;
   color: #eee;
@@ -254,66 +296,64 @@
   width: 128px;
   height: 128px;
   border-radius: 50%;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
-#staff-detail h3 { margin: 0.5rem 0; }
+#staff-detail h3 { margin: var(--space-xs) 0; }
 #staff-detail a { color: var(--brand-blue); text-decoration: underline; }
 
 /* === SUPPORT & RANKS === */
 #support-ranks h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: var(--fs-xl);
+ 	margin-bottom: var(--space-md);
 }
 .ranks-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 1.5rem;
+  gap: var(--space-xs);
 }
 .rank-card {
   background: #1a1a1a;
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: var(--space-md);
   border: 2px solid #333;
   position: relative;
   overflow: hidden;
   opacity: 0;
   animation: fadeInUp 0.6s ease forwards;
 }
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 .rank-card.vip h3:first-of-type {
   color: var(--gold);
 }
 .rank-card.vip::before {
   content: '';
-  position: absolute; top: 0; left: -75%;
+  position: absolute;
+  top: 0; left: -75%;
   width: 50%; height: 100%;
   background: linear-gradient(120deg,transparent 0%,rgba(255,255,255,0.2)50%,transparent 100%);
   transform: skewX(-25deg);
 }
 .rank-card.vip:hover::before {
-  animation: shine 1.2s forwards;
+ 	animation: shine 1.2s forwards;
 }
 @keyframes shine {
   from { left: -75%; }
   to   { left: 150%; }
 }
+
 .price {
-  font-size: 1.1rem;
-  margin: 0 0 1rem;
+  font-size: var(--fs-md);
+  margin: 0 0 var(--space-md);
 }
 .price strong {
   color: var(--gold);
 }
 .benefits {
   list-style: disc;
-  margin: 0 0 1.5rem 1.2rem;
+  margin: 0 0 var(--space-sm) var(--space-sm);
 }
 .benefits li {
   color: var(--text-light);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-xs);
 }
 .benefits li::marker {
   color: var(--brand-blue);
@@ -323,7 +363,7 @@
 }
 .vip-btn {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
+  padding: var(--space-sm) var(--space-md);
   background: var(--gold);
   color: #121212;
   text-decoration: none;
@@ -338,23 +378,15 @@
 
 /* ==== Responsive ==== */
 @media (max-width: 768px) {
-  .slide {
-    flex: 0 0 100%;
-  }
-  .team-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
-  }
-  .ranks-grid {
-    grid-template-columns: 1fr;
-  }
-  #builds-slider .slider-window {
-    height: 240px;
-  }
+  .slide { flex: 0 0 100%; }
+  .team-grid { grid-template-columns: repeat(auto-fit, minmax(100px,1fr)); }
+  .ranks-grid { grid-template-columns: 1fr; }
+  #builds-slider .slider-window { height: 240px; }
 }
-  
-</style>
 
-</head>
+
+  </style>
+  </head>
 <body class="minecraft-page">
 
   <!-- HERO -->
@@ -528,5 +560,5 @@
   <!-- Load your JS from raw.githack -->
   <script src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/embed.js"></script>
 </body>
-</html>
 
+</html>

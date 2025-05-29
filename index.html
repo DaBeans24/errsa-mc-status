@@ -112,23 +112,37 @@ h3 { font-size: var(--fs-lg); }
   display: flex;
   gap: var(--space-xs);
 }
-.ip-box input {
-  background: rgba(255,255,255,0.2);
-  border: none;
-  padding: var(--space-xs);
-  border-radius: 4px;
-  color: var(--text-light);
-  font-size: var(--fs-md);
-}
-.ip-box button {
-  background: var(--btn-bg);
-  border: none;
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: 4px;
-  cursor: pointer;
-  color: var(--text-light);
-  font-size: var(--fs-md);
-}
+ .ip-box {
+     display: flex;
+     align-items: center;
+     gap: var(--space-xs);
+     margin-top: var(--space-md);
+   }
+   .ip-box input {
+     background: var(--ip-bg);
+     border: none;
+     padding: var(--space-xs);
+     border-radius: 4px;
+     color: var(--text-light);
+     font-size: var(--fs-md);
+     width: 10ch;
+     text-align: center;
+   }
+   /* CTA button override */
+   .ip-box .cta-button {
+     background: var(--gold);
+     color: #111;
+     border: none;
+     border-radius: 0.5rem;
+     padding: var(--space-xs) var(--space-md);
+     font-size: var(--fs-lg);
+     font-weight: bold;
+     cursor: pointer;
+     transition: transform 0.1s ease;
+   }
+   .ip-box .cta-button:hover {
+     transform: scale(1.05);
+   }
 
 .hero-image {
   position: relative;
@@ -399,10 +413,14 @@ h3 { font-size: var(--fs-lg); }
         <span class="status-text">Loading…</span>
       </div>
       <div class="players">Players: – / –</div>
-      <div class="ip-box">
-        <input id="server-ip" readonly value="errsa.mc.gg"/>
-        <button id="copy-ip">Copy IP</button>
-      </div>
+     <div class="ip-box">
+  <input id="server-ip" readonly value="errsa.mc.gg"/>
+  <!-- Inline onclick ensures it definitely calls our function -->
+  <button id="copy-ip" class="cta-button" onclick="copyAndPlay()">
+    Play on ERRSA Server
+  </button>
+</div>
+
     </div>
     <div class="hero-image" id="hero-img"></div>
   </section>

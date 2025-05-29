@@ -1,37 +1,37 @@
-/* global.css */
+/* ==== Hero Section ==== */
+.hero {
+  display: flex;
+  align-items: center;
+  height: 500px;
+  overflow: hidden;
 
-/* ==== Variables & Reset ==== */
-:root {
-  --brand-blue: #004e8a;
-  --bg-dark: #121212;
-  --text-light: #eee;
-  --ip-bg: rgba(255,255,255,0.2);
-  --btn-bg: #a0522d;
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --gold: #FFD700;
-}
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  /* bleed only 2rem into the left gutter, keep right section-padding */
+  width: calc(100% + 2rem) !important;
+  margin: 0 -2rem 2rem 0 !important;
+
+  /* add a bit of padding on the right so the image never hugs the viewport */
+  padding-right: 2rem;
 }
 
-/* ==== Body & Sections ==== */
-body {
-  font-family: var(--font-sans);
-  line-height: 1.5;
-  background-color: #fff;
-  color: #111;
-}
-body.minecraft-page {
-  background-color: var(--bg-dark);
+.hero-text {
+  flex: 0 0 auto;     /* only as wide as its content (up to max-width) */
+  max-width: 600px;
+  padding: 2rem;
   color: var(--text-light);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
 }
-section {
-  padding: 3rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+
+.hero-image {
+  /* Fix at half the container, then push it all the way right */
+  flex: 0 0 50%;
+  margin-left: auto;
+
+  /* Make sure your DIV has a background-image set in your HTML or inline style */
+  background-size: cover;
+  background-position: center;
+  height: 100%;      /* fill the hero height */
 }
+
 
 /* ==== Hero Section ==== */
 .hero {

@@ -4,15 +4,16 @@
     document.getElementById("hero-img").style.backgroundImage =
       'url("https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.png")';
 
-    // copy IP
-    document.getElementById("copy-ip").onclick = () => {
-      const ip = document.getElementById("server-ip");
-      navigator.clipboard.writeText(ip.value).then(() => {
-        const prev = ip.value;
-        ip.value = "Copied!";
-        setTimeout(() => (ip.value = prev), 1000);
+  function copyAndPlay() {
+    const ip = document.getElementById('server-ip').value;
+    navigator.clipboard.writeText(ip)
+      .then(() => {
+        alert('IP copied! Launch Minecraft and press CTRL+L to paste 🔥');
+      })
+      .catch(() => {
+        alert('Whoops—couldn’t copy. Try manually selecting & copying.');
       });
-    };
+  }
 
     // live status
     document.addEventListener("DOMContentLoaded", () => {

@@ -2,112 +2,90 @@
 
 /* ==== Variables & Reset ==== */
  :root {
-      --brand-blue: #004e8a;
-      --bg-dark: #121212;
+      --bg-dark: #111;
       --text-light: #eee;
-      --ip-bg: rgba(255,255,255,0.2);
       --btn-bg: #a0522d;
       --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      --gold: #FFD700;
     }
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: var(--font-sans);
-      line-height: 1.5;
-      background: #fff;
-      color: #111;
-    }
-    body.minecraft-page {
       background: var(--bg-dark);
       color: var(--text-light);
     }
-    section {
-      padding: 3rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
 
-    /* === HERO === */
     .hero {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;       /* force flex-start */
-      height: 500px;
-      overflow: hidden;
-
-      /* bleed into the left gutter */
-      width: calc(100% + 2rem) !important;
-      margin: 0 0 2rem -2rem !important;
-
-      /* breathing room on the right */
-      padding-right: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 60vh;
     }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
     .hero-text {
-      flex: 0 0 auto;
-      max-width: 600px;
-      padding: 2rem;
-      color: var(--text-light);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+      padding: 4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
     }
     .hero-text h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 3rem;
+      line-height: 1.1;
     }
-    .hero-text .tagline {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
+    .hero-text p {
+      font-size: 1.25rem;
       opacity: 0.9;
     }
-    .hero-image {
-      /* pin to the right half */
-      flex: 0 0 auto !important;
-      width: 50% !important;
-      margin-left: auto !important;
-      height: 100%;
-      background-size: cover !important;
-      background-position: center !important;
-    }
-
-    /* === Server status & IP === */
     .status {
       display: flex;
       align-items: center;
+      gap: 0.5rem;
       font-size: 1.1rem;
-      margin-bottom: .75rem;
     }
     .status-dot {
-      width: 12px; height: 12px; border-radius: 50%;
-      background: #0f0; margin-right: .5rem;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #0f0;
       animation: blink 1.5s step-start infinite;
     }
     @keyframes blink {
       0%,50%,100% { opacity: 1; }
       25%,75%     { opacity: 0; }
     }
-    .status-text { font-weight: 500; margin-right: 1rem; }
-    .players {
-      display: block; font-size: 1rem;
-      color: var(--text-light);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.7);
-      margin-bottom: 1rem;
+    .players { font-size: 1rem; }
+    .ip-box {
+      display: flex;
+      gap: 0.5rem;
     }
-    .ip-box { display: flex; align-items: center; }
     .ip-box input {
-      background: var(--ip-bg); border: none;
-      color: var(--text-light); padding: .5rem;
-      border-radius: 4px; width: 140px; font-size: 1rem;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+      background: rgba(255,255,255,0.2);
+      border: none;
+      padding: 0.5rem;
+      border-radius: 4px;
+      color: var(--text-light);
     }
     .ip-box button {
-      background: var(--btn-bg); border: none;
-      color: var(--text-light); padding: .5rem 1rem;
-      margin-left: .5rem; cursor: pointer;
-      border-radius: 4px; font-size: 1rem;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+      background: var(--btn-bg);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-light);
+    }
+
+    .hero-image {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+    /* gradient overlay to improve text contrast */
+    .hero-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
     }
 
     /* === Builds slider === */

@@ -1,3 +1,37 @@
+/* global.css */
+
+/* ==== Variables & Reset ==== */
+:root {
+  --brand-blue: #004e8a;
+  --bg-dark: #121212;
+  --text-light: #eee;
+  --ip-bg: rgba(255,255,255,0.2);
+  --btn-bg: #a0522d;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --gold: #FFD700;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==== Body & Sections ==== */
+body {
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  background-color: #fff;
+  color: #111;
+}
+body.minecraft-page {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 /* ==== Hero Section ==== */
 .hero {
   display: flex;

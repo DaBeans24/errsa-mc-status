@@ -36,6 +36,7 @@ section {
 /* ==== Hero Section ==== */
 .hero {
   display: flex;
+  align-items: center;
   height: 500px;
   overflow: hidden;
 
@@ -61,11 +62,12 @@ section {
 }
 .hero-image {
   flex: 1;
-  background-size: cover;
-  background-position: center;
+  margin-left: auto;
 
   /* add breathing room from the right edge */
   padding-right: 2rem;
+    background-size: cover;
+  background-position: center;
 }
 
 /* ==== Server Status & Player Count ==== */
@@ -140,9 +142,9 @@ section {
   overflow: hidden;
 }
 .slider-window {
-  overflow: hidden;
-  height: 300px;
-  width: 100% !important;
+  position: relative;
+  overflow: visible;
+  
 }
 .slider-track {
   display: flex;
@@ -187,8 +189,8 @@ section {
   cursor: pointer;
   z-index: 10;
 }
-.slider-btn.prev { left: 0.5rem; }
-.slider-btn.next { right: 0.5rem; }
+.slider-btn.prev { left: 1rem; }
+.slider-btn.next { right: 1rem; }
 
 /* ==== Latest Updates ==== */
 #events-updates h2 {

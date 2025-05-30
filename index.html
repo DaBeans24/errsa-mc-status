@@ -157,6 +157,18 @@ h3 { font-size: var(--fs-lg); }
   background: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
 }
 
+/* === SUBTLE SCROLL TRANSFORMATION === */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+    
 /* === COMMUNITY BUILDS SLIDER === */
 #builds-slider {
   padding-top: calc(var(--space-xl) + var(--space-xs));

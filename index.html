@@ -138,8 +138,11 @@ h3 { font-size: var(--fs-lg); }
    }
    /* CTA button override */
    .ip-box .cta-button {
-     background: linear-gradient(135deg, #FF5F6D 0%, #FFC371 100%);
-     color: #111;
+       /* peachy keen gradient */
+  background: linear-gradient(135deg, #FF5F6D 0%, #FFC371 100%);
+  background-size: 200% 200%;              /* so it can shift */
+  animation: ctaGradientShift 6s ease infinite;
+  /* keep your hover filter */
      border: none;
      border-radius: 0.5rem;
      padding: var(--space-xs) var(--space-md);
@@ -412,6 +415,12 @@ h3 { font-size: var(--fs-lg); }
   50%     { box-shadow: 0 0 10px 10px rgba(255,223,0,0.3); }
 }
 
+@keyframes ctaGradientShift {
+  0%   { background-position:   0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position:   0% 50%; }
+}
+    
 /* ==== Responsive ==== */
 @media (max-width: 768px) {
   .slide { flex: 0 0 100%; }

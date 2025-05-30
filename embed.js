@@ -93,3 +93,19 @@ document.querySelectorAll('.staff-card').forEach(card => {
 document.getElementById('close-detail').addEventListener('click', () => {
   document.getElementById('staff-detail').classList.add('hidden');
 });
+
+const items = document.querySelectorAll('.slide, .update-item, .staff-card');
+  const obs = new IntersectionObserver((entries, o) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        o.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  items.forEach(el => {
+    el.classList.add('reveal');
+    obs.observe(el);
+  });
+

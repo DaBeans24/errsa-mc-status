@@ -69,12 +69,20 @@ h3 { font-size: var(--fs-lg); }
   .hero { grid-template-columns: 1fr; }
 }
 
+    /* Entry animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+    
 .hero-text {
   padding-block: var(--space-lg) var(--space-lg);
   padding-inline: var(--space-md);
   display: flex;
   flex-direction: column;
   justify-content: center;
+   opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards 0.3s;
   gap: var(--space-sm);
 }
 .hero-text h1 {

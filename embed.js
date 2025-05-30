@@ -109,3 +109,8 @@ const items = document.querySelectorAll('.slide, .update-item, .staff-card');
     obs.observe(el);
   });
 
+const heroImg = document.getElementById('hero-img');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY * 0.25;   // 0.25 = very subtle
+    heroImg.style.transform = `translateY(${y}px)`;
+  });

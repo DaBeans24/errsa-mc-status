@@ -18,10 +18,30 @@
   <link rel="preconnect" href="https://raw.githack.com">
   <link rel="preconnect" href="https://api.mcsrvstat.us">
   <link rel="preconnect" href="https://crafatar.com">
-  <link rel="preload"
-        as="image"
-        href="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.avif"
-        type="image/avif">
+<!-- Preload the AVIF hero image at both 1× and 2× densities -->
+<link
+  rel="preload"
+  as="image"
+  href="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.avif"
+  imagesrcset="
+    https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.avif      1x,
+    https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.avif   2x
+  "
+  imagesizes="100vw"
+  type="image/avif"
+  fetchpriority="high"
+/>
+
+<!-- Preload the 800 px version when the viewport is larger -->
+<link
+  rel="preload"
+  as="image"
+  href="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.avif"
+  type="image/avif"
+  media="(min-width: 481px)"
+  fetchpriority="high"
+/>
+
 
   <style>
     /* ─── Variables ───────────────────────────────────────── */
@@ -181,12 +201,13 @@ h3 { font-size: var(--fs-lg); }
     }
 
   .hero-image {
-  position: relative;       /* for the ::before gradient */
+   
+   position: relative;       /* for the ::before gradient */
   overflow: hidden;         /* crop the img & gradient to the container */
   will-change: transform;   /* for your parallax JS */
   display: block;           /* fill its grid cell */
   width: 100%;
-  height: 100%;
+  height: 60vh;
 }
 
 .hero-image::before {
@@ -194,14 +215,17 @@ h3 { font-size: var(--fs-lg); }
   position: absolute;
   inset: 0;
   /* your dark-to-transparent fade on the left */
-  background: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
+    background: linear-gradient(to left, var(--bg-dark), transparent);
+
   pointer-events: none;     /* so clicks pass through to any controls */
 }
 
 .hero-image img {
+    
   display: block;           /* remove inline whitespace/gap */
   width: 100%;              /* fill the container */
-  height: 100%;
+  height: auto;
+  object-position: center center;
   object-fit: cover;        /* preserve cover behavior */
 }
 
@@ -502,29 +526,61 @@ h3 { font-size: var(--fs-lg); }
         </div>
       </div>
 
-      <!-- Hero image in next-gen formats -->
       <picture class="hero-image">
-        <source
-          type="image/avif"
-          srcset="
-            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.avif      1x,
-            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.avif   2x
-          ">
-        <source
-          type="image/webp"
-          srcset="
-            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.webp      1x,
-            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.webp   2x
-          ">
-        <img
-          loading="lazy"
-          src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.png"
-          srcset="
-            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.png       1x,
-            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.png    2x
-          "
-          alt="Aerial view of the Minecraft hub under a cherry blossom tree">
-      </picture>
+  <!-- 1) AVIF for mobile (≤ 480px viewport) -->
+  <source
+    type="image/avif"
+    media="(max-width: 480px)"
+    srcset="
+      https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.avif   1x,
+      https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.avif   2x
+    "
+  >
+
+  <!-- 2) AVIF for larger screens (≥ 481px viewport) -->
+  <source
+    type="image/avif"
+    media="(min-width: 481px)"
+    srcset="
+      https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.avif   1x,
+      https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.avif  2x
+    "
+  >
+
+  <!-- 3) WebP fallback for mobile (≤ 480px) -->
+  <source
+    type="image/webp"
+    media="(max-width: 480px)"
+    srcset="
+      https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.webp   1x,
+      https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.webp   2x
+    "
+  >
+
+  <!-- 4) WebP fallback for larger screens (≥ 481px) -->
+  <source
+    type="image/webp"
+    media="(min-width: 481px)"
+    srcset="
+      https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.webp   1x,
+      https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.webp  2x
+    "
+  >
+
+  <!-- 5) PNG fallback (1x & 2x) for older browsers -->
+  <img
+    src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.png"
+    srcset="
+      https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.png   1x,
+      https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.png  2x
+    "
+    width="800"
+    height="600"
+    alt="Aerial view of the Minecraft hub under a cherry blossom tree"
+    style="width:100%; height:auto;"
+  >
+</picture>
+
     </section>
   </header>
 

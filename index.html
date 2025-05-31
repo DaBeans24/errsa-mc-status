@@ -340,8 +340,8 @@ h3 { font-size: var(--fs-lg); }
   transition: transform 0.2s, box-shadow 0.2s;
   animation: fadeInUp 0.6s ease forwards;
   /* NEW: Ensure a minimum height/width for mobile taps */
-  min-width:  60px;   /* or at least 48px—use a comfortably larger number */
-  min-height: 60px;   /* same principle, keep it big enough to tap */
+  min-width:  100px;   /* or at least 48px—use a comfortably larger number */
+  min-height: 100px;   /* same principle, keep it big enough to tap */
   /* you already have grid-gap on the parent, so spacing is ok */
 }
 .staff-card:hover {
@@ -387,7 +387,11 @@ h3 { font-size: var(--fs-lg); }
   margin-bottom: var(--space-md);
 }
 #staff-detail h3 { margin: var(--space-xs) 0; }
-#staff-detail a { color: var(--brand-blue); text-decoration: underline; }
+#staff-detail a { color: var(--text-light); text-decoration: underline; }
+.staff-card a {
+  color: var(--brand-blue);
+  text-decoration: underline;
+}
 
 /* === SUPPORT & RANKS === */
 #support-ranks h2 {
@@ -761,32 +765,7 @@ h3 { font-size: var(--fs-lg); }
     <!-- optional footer content -->
   </footer>
 
-  <script>
-    // Copy & Play
-    document.getElementById('copy-ip').addEventListener('click', () => {
-      const ip = document.getElementById('server-ip').value;
-      navigator.clipboard.writeText(ip)
-        .then(() => alert('IP copied! Launch Minecraft and press CTRL+L to paste 🔥'));
-    });
-
-    // Scroll‐reveal
-    const items = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver((entries, o) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          o.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    items.forEach(el => obs.observe(el));
-
-    // Parallax hero image
-    const heroImg = document.querySelector('.hero-image img');
-    window.addEventListener('scroll', () => {
-      heroImg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
-    });
-  </script>
+ 
   <script>  // live status
     document.addEventListener("DOMContentLoaded", () => {
       const dot = document.querySelector(".status-dot");
@@ -853,30 +832,79 @@ document.querySelectorAll('.staff-card').forEach(card => {
     detail.classList.remove('hidden');
   });
 });
-</script><script>// Close the detail panel
-document.getElementById('close-detail').addEventListener('click', () => {
-  document.getElementById('staff-detail').classList.add('hidden');
-});
+</script><script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // ── 1) Copy & Play button ─────────────────────────────────────
+    const copyBtn = document.getElementById('copy-ip');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const ipField = document.getElementById('server-ip');
+        if (!ipField) return;
+        const ip = ipField.value;
+        navigator.clipboard.writeText(ip)
+          .then(() => alert('IP copied! Launch Minecraft and press CTRL+L to paste 🔥'))
+          .catch(() => alert('Failed to copy IP.'));
+      });
+    }
 
-const items = document.querySelectorAll('.slide, .update-item, .staff-card');
-  const obs = new IntersectionObserver((entries, o) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        o.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.2 });
+    // ── 2) Scroll-reveal for any element with class="reveal" ──────
+    const revealItems = document.querySelectorAll('.reveal');
+    if (revealItems.length) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
 
-  items.forEach(el => {
-    el.classList.add('reveal');
-    obs.observe(el);
+      revealItems.forEach(el => {
+        revealObserver.observe(el);
+      });
+    }
+
+    // ── 3) Scroll-reveal + add “reveal” class on slides, updates, staff-cards ─────
+    // Rename both collections so they don’t collide with `revealItems` above.
+    const tileItems = document.querySelectorAll('.slide, .update-item, .staff-card');
+    if (tileItems.length) {
+      const tileObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      tileItems.forEach(el => {
+        // Ensure these elements start hidden + moved down (opacity:0, translateY)
+        el.classList.add('reveal');
+        tileObserver.observe(el);
+      });
+    }
+
+    // ── 4) Parallax effect for hero image ─────────────────────────
+    const heroImg = document.querySelector('.hero-image img');
+    if (heroImg) {
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY * 0.25; // gentle parallax factor
+        heroImg.style.transform = `translateY(${y}px)`;
+      });
+    }
+
+    // ── 5) Close the staff detail panel ────────────────────────────
+    const closeBtn = document.getElementById('close-detail');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        const detailPanel = document.getElementById('staff-detail');
+        if (detailPanel) {
+          detailPanel.classList.add('hidden');
+        }
+      });
+    }
   });
-const heroImg = document.querySelector('.hero-image img');
-window.addEventListener('scroll', () => {
-  if (!heroImg) return;
-  heroImg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
-});
 </script>
+
 </body>
 </html>

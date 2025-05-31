@@ -4,10 +4,30 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>ERRSA Minecraft Server</title>
+
+  <!-- SEO & Social -->
+  <meta name="description"
+        content="Join the ERRSA Minecraft Server—play, explore, and build together with the ERAU campus community!">
+  <meta property="og:title"       content="ERRSA Minecraft Server">
+  <meta property="og:description" content="Play, explore & build with ERAU’s community server.">
+  <meta property="og:image"       content="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.avif">
+  <meta property="og:url"         content="https://errsa.mc.gg">
+  <meta name="twitter:card"       content="summary_large_image">
+
+  <!-- Preconnect & Preload LCP image -->
+  <link rel="preconnect" href="https://raw.githack.com">
+  <link rel="preconnect" href="https://api.mcsrvstat.us">
+  <link rel="preconnect" href="https://crafatar.com">
+  <link rel="preload"
+        as="image"
+        href="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.avif"
+        type="image/avif">
+
   <style>
-   :root {
-  /* Spacing scale */
-  --space-base: 1rem;
+    /* ─── Variables ───────────────────────────────────────── */
+    :root {
+        /* Spacing scale */
+      --space-base: 1rem;
   --space-xxs: calc(var(--space-base) * 0.25);
   --space-xs:  calc(var(--space-base) * 0.5);
   --space-sm:  var(--space-base);
@@ -15,16 +35,15 @@
   --space-lg:  calc(var(--space-base) * 4);
   --space-xl:  calc(var(--space-base) * 8);
 
-  /* Color variables */
+     /* Color variables */
     --brand-blue: #004e8a;
   --bg-dark: #111;
   --text-light: #eee;
   --ip-bg: rgba(255,255,255,0.2);
   --btn-bg: #a0522d;
- 
   --gold: #FFD700;
 
-  /* Typography */
+ /* Typography */
   --font-heading: 'Roboto', sans-serif;
   --font-body:    'Inter', sans-serif;
   --type-scale-ratio: 1.25;
@@ -37,17 +56,19 @@
   --fs-3xl:    calc(var(--fs-2xl) * var(--type-scale-ratio));
   --lh-body:    1.6;
   --lh-heading: 1.2;
-}
+    }
 
-/* Base typography */
-body {
-  font-family: var(--font-body);
-  font-size: var(--fs-md);
-  line-height: var(--lh-body);
-  background: var(--bg-dark);
-  color: var(--text-light);
-}
-h1, h2, h3, h4, h5, h6 {
+    /* ─── Base ───────────────────────────────────────────────── */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: var(--fs-md);
+      line-height: var(--lh-body);
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   line-height: var(--lh-heading);
   letter-spacing: 0.02em;
@@ -58,134 +79,157 @@ h1 { font-size: var(--fs-3xl); }
 h2 { font-size: var(--fs-xl); }
 h3 { font-size: var(--fs-lg); }
 
-/* Layout and Components */
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
-  min-height: 60vh;
-}
-@media (max-width: 768px) {
-  .hero { grid-template-columns: 1fr; }
-}
-
-    /* Entry animation */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+    /* ─── Hero ──────────────────────────────────────────────── */
+    header {
+      padding: var(--space-lg) var(--space-md);
+    }
     
+  /* Layout and Components */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      align-items: center;
+      min-height: 60vh;
+    }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+    
+   
+    /* Text column */
 .hero-text {
+  /* your original spacing & flex layout */
   padding-block: var(--space-lg) var(--space-lg);
   padding-inline: var(--space-md);
   display: flex;
   flex-direction: column;
   justify-content: center;
-   opacity: 0;
-  animation: fadeInUp 0.8s ease-out forwards 0.3s;
   gap: var(--space-sm);
+
+  /* reveal animation */
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards 0.3s;
 }
+
 .hero-text h1 {
-  /* Use typographic scale */
+  /* your typographic scale */
   font-size: var(--fs-3xl);
   line-height: var(--lh-heading);
 }
+
 .hero-text p {
+  /* your body text styling + a max width for readability */
   font-size: var(--fs-md);
   line-height: var(--lh-body);
   max-width: 60ch;
   opacity: 0.9;
 }
 
-.status {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  font-size: var(--fs-md);
-}
-.status-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #0f0;
-  animation: blink 1.5s step-start infinite;
-}
-@keyframes blink {
-  0%,50%,100% { opacity: 1; }
-  25%,75%     { opacity: 0; }
-}
-.players { font-size: var(--fs-sm); }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--fs-md);
+    }
+    .status-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #0f0;
+      animation: blink 1.5s step-start infinite;
+    }
+   
+    .players { margin-top: var(--space-xs); font-size: var(--fs-sm); }
 
-.ip-box {
-  display: flex;
-  gap: var(--space-xs);
-}
- .ip-box {
-     display: flex;
-     align-items: center;
-     gap: var(--space-xs);
-     margin-top: var(--space-md);
-   }
-   .ip-box input {
-     background: var(--ip-bg);
-     border: none;
-     padding: var(--space-xs);
-     border-radius: 4px;
-     color: var(--text-light);
-     font-size: var(--fs-md);
-     width: 10ch;
-     text-align: center;
-   }
-   /* CTA button override */
-   .ip-box .cta-button {
-       /* peachy keen gradient */
-  background: linear-gradient(135deg, #FF5F6D 0%, #FFC371 100%);
-  background-size: 200% 200%;              /* so it can shift */
-  animation: ctaGradientShift 6s ease infinite;
-  /* keep your hover filter */
-     border: none;
-     border-radius: 0.5rem;
-     padding: var(--space-xs) var(--space-md);
-     font-size: var(--fs-lg);
-     font-weight: bold;
-     cursor: pointer;
-     transition: transform 0.1s ease;
-   }
-   .ip-box .cta-button:hover {
-     transform: scale(1.05);
-     filter: brightness(1.05);
-   }
+    /* Copy/Play CTA */
+    .ip-box {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      margin-top: var(--space-md);
+    }
+    .ip-box input {
+      background: var(--ip-bg);
+      border: none;
+      padding: var(--space-xs);
+      border-radius: 4px;
+      color: var(--text-light);
+      font-size: var(--fs-md);
+      width: 11ch;
+      text-align: center;
+    }
+    @keyframes ctaGradientShift {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    .cta-button {
+      background: linear-gradient(135deg,#FF5F6D 0%,#FFC371 100%);
+      background-size: 200% 200%;
+      animation: ctaGradientShift 6s ease infinite;
+      border: none;
+      border-radius: 0.5rem;
+      padding: var(--space-xs) var(--space-md);
+      font-size: var(--fs-lg);
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+    .cta-button:hover {
+      transform: scale(1.05);
+      filter: brightness(1.05);
+    }
 
-.hero-image {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  will-change: transform;
+  .hero-image {
+  position: relative;       /* for the ::before gradient */
+  overflow: hidden;         /* crop the img & gradient to the container */
+  will-change: transform;   /* for your parallax JS */
+  display: block;           /* fill its grid cell */
+  width: 100%;
+  height: 100%;
 }
+
 .hero-image::before {
   content: "";
   position: absolute;
   inset: 0;
+  /* your dark-to-transparent fade on the left */
   background: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
+  pointer-events: none;     /* so clicks pass through to any controls */
 }
 
-/* === SUBTLE SCROLL TRANSFORMATION === */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+.hero-image img {
+  display: block;           /* remove inline whitespace/gap */
+  width: 100%;              /* fill the container */
+  height: 100%;
+  object-fit: cover;        /* preserve cover behavior */
 }
 
-    
-/* === COMMUNITY BUILDS SLIDER === */
-#builds-slider {
-  padding-top: calc(var(--space-xl) + var(--space-xs));
-}
-#builds-slider .slider { position: relative; }
+
+    /* ─── Animations ───────────────────────────────────────── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink {
+      0%,50%,100%{opacity:1}
+      25%,75%{opacity:0}
+    }
+    /* === SUBTLE SCROLL TRANSFORMATION === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* ─── Community Builds Slider (excerpt) ─────────────────── */
+    #builds-slider { padding: var(--space-xl) var(--space-xs); }
+    #builds-slider .slider { position: relative; }
 #builds-slider .slider-window {
   overflow: hidden;
   height: 320px;
@@ -194,33 +238,31 @@ h3 { font-size: var(--fs-lg); }
   display: flex;
   transition: transform 0.4s ease;
 }
-#builds-slider .slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  border: none;
-  font-size: var(--fs-2xl);
-  width: 2.5rem;
-  height: 2.5rem;
-  cursor: pointer;
-  z-index: 10;
-}
-#builds-slider .slider-btn.prev { left: var(--space-sm); }
-#builds-slider .slider-btn.next { right: var(--space-sm); }
-#builds-slider .slide {
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      font-size: var(--fs-2xl);
+      width: 2.5rem;
+      height: 2.5rem;
+      cursor: pointer;
+      z-index:10;
+    }
+    .slider-btn.prev { left: var(--space-sm); }
+    .slider-btn.next { right: var(--space-sm); }
+    .slide img { loading: lazy; width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px; }
+    .slide {
   flex: 0 0 calc(100%/3);
   padding: var(--space-xs);
   position: relative;
 }
-#builds-slider .slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 4px;
-}
-#builds-slider .caption {
+.caption {
   position: absolute;
   bottom: var(--space-xxs);
   left: 50%;
@@ -236,6 +278,7 @@ h3 { font-size: var(--fs-lg); }
   #builds-slider .slide { flex: 0 0 100%; }
   #builds-slider .slider-window { height: 240px; }
 }
+    /* (…keep the rest of your CSS for Updates, Staff, Ranks here…) */
 
 /* ==== Latest Updates ==== */
 #events-updates h2 {
@@ -429,75 +472,97 @@ h3 { font-size: var(--fs-lg); }
   #builds-slider .slider-window { height: 240px; }
 }
 
-
   </style>
-  </head>
-<body class="minecraft-page">
+</head>
+<body>
 
-  <!-- HERO -->
-    <section class="hero">
-    <div class="hero-text">
-      <h1>The ERRSA Minecraft Server</h1>
-      <p>Play, explore, and build together with the ERAU campus</p>
-      <div class="status">
-        <span class="status-dot"></span>
-        <span class="status-text">Loading…</span>
+  <header>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-text">
+        <h1 id="hero-title">The ERRSA Minecraft Server</h1>
+        <p>Play, explore, and build together with the ERAU campus</p>
+        <div class="status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-text">Loading…</span>
+        </div>
+        <div class="players">Players: – / –</div>
+        <div class="ip-box">
+          <input id="server-ip" readonly value="errsa.mc.gg" aria-label="Server IP"/>
+          <button id="copy-ip" class="cta-button">Play on ERAU Server</button>
+        </div>
       </div>
-      <div class="players">Players: – / –</div>
-     <div class="ip-box">
-  <input id="server-ip" readonly value="errsa.mc.gg"/>
-  <!-- Inline onclick ensures it definitely calls our function -->
-  <button id="copy-ip" class="cta-button" onclick="copyAndPlay()">
-    Play on ERRSA Server
-  </button>
-</div>
 
-    </div>
-    <div class="hero-image" id="hero-img"></div>
-  </section>
+      <!-- Hero image in next-gen formats -->
+      <picture class="hero-image" role="img" aria-label="Aerial view of our Minecraft hub under a cherry blossom tree">
+        <source
+          type="image/avif"
+          srcset="
+            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.avif      1x,
+            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.avif   2x
+          ">
+        <source
+          type="image/webp"
+          srcset="
+            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.webp      1x,
+            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.webp   2x
+          ">
+        <img
+          loading="lazy"
+          src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.png"
+          srcset="
+            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo.png       1x,
+            https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/hub-photo@2x.png    2x
+          "
+          alt="Aerial view of the Minecraft hub under a cherry blossom tree">
+      </picture>
+    </section>
+  </header>
 
-  <!-- BUILDS SLIDER -->
-  <section id="builds-slider">
-    <h2>Community Builds</h2>
-    <div class="slider">
-      <button class="slider-btn prev">‹</button>
-      <div class="slider-window">
-        <ul class="slider-track">
-          <li class="slide">
-            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build1.jpg" alt="">
-            <p class="caption">Our Grand Castle</p>
+  <main>
+    <!-- Community Builds -->
+    <section id="builds-slider" aria-labelledby="builds-title">
+      <h2 id="builds-title">Community Builds</h2>
+      <div class="slider" role="region" aria-roledescription="carousel">
+        <button class="slider-btn prev" aria-label="Previous build">‹</button>
+        <div class="slider-window">
+          <ul class="slider-track">
+            <li class="slide reveal">
+              <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build1.jpg"
+                   alt="Our Grand Castle at dusk">
+              <p class="caption">Our Grand Castle</p>
+            </li>
+              <li class="slide reveal">
+            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build2.jpg" alt="Suspension Skybridge over ocean">
+             <p class="caption">Suspended Skybridge</p>
           </li>
-          <li class="slide">
-            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build2.jpg" alt="">
-            <p class="caption">Suspended Skybridge</p>
-          </li>
-          <li class="slide">
-            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build3.jpg" alt="">
+          <li class="slide reveal">
+            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build3.jpg" alt="Central fountain surrounded by garden">
             <p class="caption">Central Fountain</p>
           </li>
-           <li class="slide">
-            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build4.jpg" alt="">
+           <li class="slide reveal">
+            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build4.jpg" alt="Huge castle created by">
             <p class="caption">Our Grand Castle</p>
           </li>
-          <li class="slide">
+          <li class="slide reveal">
             <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build5.jpg" alt="">
             <p class="caption">Suspended Skybridge</p>
           </li>
-          <li class="slide">
+          <li class="slide reveal">
             <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build6.jpg" alt="">
             <p class="caption">Central Fountain</p>
           </li>
-          <!-- add more slides... -->
-        </ul>
+            <!-- more slides… -->
+          </ul>
+        </div>
+        <button class="slider-btn next" aria-label="Next build">›</button>
       </div>
-      <button class="slider-btn next">›</button>
-    </div>
-  </section>
- <!-- Events & Updates -->
-  <section id="events-updates">
-  <h2>Latest Updates</h2>
-  <div class="updates">
-    <div class="update-item">
+    </section>
+
+    <!-- Latest Updates -->
+    <section id="events-updates" aria-labelledby="updates-title">
+      <h2 id="updates-title">Latest Updates</h2>
+      <div class="updates">
+        <div class="update-item">
       <time datetime="2025-06-10" class="update-date">June 10, 2025 Update</time>
       <p class="update-message">
         We’ve patched to Minecraft 1.21.4—new mining loot tables, performance optimizations, and several bug fixes.
@@ -510,104 +575,302 @@ h3 { font-size: var(--fs-lg); }
       </p>
     </div>
     <!-- Add more .update-item blocks here -->
-  </div>
+      </div>
+    </section>
+
+   <!-- Discord & Support -->
+<section id="discord-support" aria-labelledby="discord-support-title">
+  <h2 id="discord-support-title">Discord &amp; Support</h2>
+  <p>Join our community on Discord for real-time help, FAQs, and voice chat:</p>
+  <a
+    class="btn"
+    href="https://discord.gg/your-invite"
+    target="_blank"
+    rel="noopener"
+    aria-label="Join our Discord server for real-time help and chat"
+  >
+    Join Discord
+  </a>
+
+  <h3 id="faq-title">Quick FAQs</h3>
+
+  <details aria-labelledby="faq-connect-summary">
+    <summary id="faq-connect-summary">Why can’t I connect?</summary>
+    <p>
+      Make sure you’re on version 1.21.4 and have properly registered
+      (Full guide in Discord)…
+    </p>
+  </details>
+
+  <details aria-labelledby="faq-claim-summary">
+    <summary id="faq-claim-summary">How do I claim land?</summary>
+    <p>
+      To claim land, equip a stick and right-click two opposite corners
+      of the area you want to protect.<br/>
+      To remove (abandon) an existing claim, run:
+      <code aria-label="Abandon claim command">/abandonclaim &lt;ClaimName&gt;</code>
+    </p>
+  </details>
 </section>
 
-
-  <!-- Discord & Support -->
-  <section id="discord-support">
-    <h2>Discord & Support</h2>
-    <p>Join our community on Discord for real-time help, FAQs, and voice chat:</p>
-    <a class="btn" href="https://discord.gg/your-invite">Join Discord</a>
-    <h3>Quick FAQs</h3>
-    <details>
-      <summary>Why can’t I connect?</summary>
-      <p>Make sure you’re on version 1.21.4 and have properly registered (Full guide in Discord)...</p>
-    </details>
-    <details>
-      <summary>How do I claim land?</summary>
-      <p>
-  To claim land, equip a stick and right-click two opposite corners of the area you want to protect.  
-  To remove (abandon) an existing claim, run:
-  <code>/abandonclaim &lt;ClaimName&gt;</code>
-</p>
-
-    </details>
-  </section>
-
 <!-- Meet the Staff -->
-<section id="staff-community">
-  <h2>Meet the Team</h2>
+<section id="staff-community" aria-labelledby="staff-community-title">
+  <h2 id="staff-community-title">Meet the Team</h2>
   <div class="team-grid">
-    <!-- For each staff member, change data-uuid, data-name, data-role, and the Discord link/text -->
-    <div class="staff-card"
-         data-uuid="a6d2a071ca8b42848ec270f28d10b024"
-         data-name="DaBeans24"
-         data-role="Admin">
-      <img class="skin"
-           src="https://crafatar.com/avatars/a6d2a071ca8b42848ec270f28d10b024?size=128&overlay"
-           alt="ModName Skin">
+    <div
+      class="staff-card"
+      role="button"
+      tabindex="0"
+      data-uuid="a6d2a071ca8b42848ec270f28d10b024"
+      data-name="DaBeans24"
+      data-role="Admin"
+      aria-label="DaBeans24, Admin — click for more info"
+    >
+      <img
+        class="skin"
+        src="https://crafatar.com/avatars/a6d2a071ca8b42848ec270f28d10b024?size=128&overlay"
+        alt="Minecraft avatar of DaBeans24"
+      >
       <h3>DaBeans24</h3>
       <p>Admin</p>
-      <a href="https://discord.gg/gFcVzV95xt" target="_blank">@ModDiscord</a>
+      <a
+        href="https://discord.gg/gFcVzV95xt"
+        target="_blank"
+        rel="noopener"
+        aria-label="Message DaBeans24 on Discord"
+      >
+        @ModDiscord
+      </a>
     </div>
-    <!-- copy/paste the above block for each staff -->
-    <div class="staff-card"
-         data-uuid="47b39c2e8f5244129aa6860e9cb4480b"
-         data-name="EnderPlays101"
-         data-role="Admin">
-      <img class="skin"
-           src="https://crafatar.com/avatars/47b39c2e8f5244129aa6860e9cb4480b?size=128&overlay"
-           alt="ModName Skin">
+    <div
+      class="staff-card"
+      role="button"
+      tabindex="0"
+      data-uuid="47b39c2e8f5244129aa6860e9cb4480b"
+      data-name="EnderPlays101"
+      data-role="Admin"
+      aria-label="EnderPlays101, Admin — click for more info"
+    >
+      <img
+        class="skin"
+        src="https://crafatar.com/avatars/47b39c2e8f5244129aa6860e9cb4480b?size=128&overlay"
+        alt="Minecraft avatar of EnderPlays101"
+      >
       <h3>EnderPlays101</h3>
       <p>Admin</p>
-      <a href="https://discord.gg/gFcVzV95xt" target="_blank">@ModDiscord</a>
+      <a
+        href="https://discord.gg/gFcVzV95xt"
+        target="_blank"
+        rel="noopener"
+        aria-label="Message EnderPlays101 on Discord"
+      >
+        @ModDiscord
+      </a>
     </div>
-    <div class="staff-card"
-         data-uuid="c5246278bcc6479a943745b8439b948c"
-         data-name="RedEagle3"
-         data-role="Admin">
-      <img class="skin"
-           src="https://crafatar.com/avatars/c5246278bcc6479a943745b8439b948c?size=128&overlay"
-           alt="ModName Skin">
+     <div
+      class="staff-card"
+      role="button"
+      tabindex="0"
+      data-uuid="c5246278bcc6479a943745b8439b948c"
+      data-name="RedEagle3"
+      data-role="Admin"
+      aria-label="RedEagle3, Admin — click for more info"
+    >
+      <img
+        class="skin"
+        src="https://crafatar.com/avatars/c5246278bcc6479a943745b8439b948c?size=128&overlay"
+        alt="Minecraft avatar of RedEagle3"
+      >
       <h3>RedEagle3</h3>
       <p>Admin</p>
-      <a href="https://discord.gg/gFcVzV95xt" target="_blank">@ModDiscord</a>
+      <a
+        href="https://discord.gg/gFcVzV95xt"
+        target="_blank"
+        rel="noopener"
+        aria-label="Message RedEagle3 on Discord"
+      >
+        @ModDiscord
+      </a>
     </div>
+    <!-- Repeat for each staff member, updating aria-labels accordingly -->
   </div>
 
   <!-- Hidden detail panel -->
-  <aside id="staff-detail" class="hidden">
-    <button id="close-detail">×</button>
-    <img id="detail-skin" alt="Selected Skin">
+  <aside
+    id="staff-detail"
+    class="hidden"
+    aria-labelledby="detail-name"
+    role="dialog"
+    aria-modal="true"
+  >
+    <button
+      id="close-detail"
+      aria-label="Close staff detail panel"
+    >×</button>
+    <img id="detail-skin" alt="Selected staff avatar">
     <h3 id="detail-name"></h3>
     <p id="detail-role"></p>
-    <a id="detail-discord" href="#" target="_blank"></a>
+    <a
+      id="detail-discord"
+      href="#"
+      target="_blank"
+      rel="noopener"
+      aria-label="Message selected staff on Discord"
+    ></a>
   </aside>
 </section>
 
-
-  <!-- Donate & Ranks -->
-  <section id="support-ranks">
-  <h2>Support &amp; Ranks</h2>
+<!-- Donate & Ranks -->
+<section id="support-ranks" aria-labelledby="support-ranks-title">
+  <h2 id="support-ranks-title">Support &amp; Ranks</h2>
   <div class="ranks-grid">
-    <div class="rank-card vip">
-      <h3>VIP</h3>
-      <p class="price">One-time purchase: <strong>$15</strong></p>
+    <div class="rank-card vip" aria-labelledby="vip-title">
+      <h3 id="vip-title">VIP</h3>
+      <p class="price">
+        One-time purchase:
+        <strong aria-label="$15 USD">$15</strong>
+      </p>
       <ul class="benefits">
         <li><strong>Custom Name Tag</strong> — choose your in-game tag color</li>
         <li><strong>Item Naming &amp; Lore</strong> — access to <code>/itemname</code> &amp; <code>/itemlore</code></li>
         <li><strong>Statue in Tribute Temple</strong> — immortalize your character in our hub</li>
         <li><strong>Server Support</strong> — you help keep ERRSA alive for everyone</li>
       </ul>
-      <a class="btn vip-btn" href="/donate?tier=vip" target="_blank">Become VIP</a>
+      <a
+        class="btn vip-btn"
+        href="/donate?tier=vip"
+        target="_blank"
+        rel="noopener"
+        aria-label="Become a VIP on ERRSA server for $15"
+      >
+        Become VIP
+      </a>
     </div>
   </div>
 </section>
 
+  </main>
 
-  <!-- Load your JS from raw.githack -->
-  <script src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/embed.js"></script>
+  <footer>
+    <!-- optional footer content -->
+  </footer>
+
+  <script>
+    // Copy & Play
+    document.getElementById('copy-ip').addEventListener('click', () => {
+      const ip = document.getElementById('server-ip').value;
+      navigator.clipboard.writeText(ip)
+        .then(() => alert('IP copied! Launch Minecraft and press CTRL+L to paste 🔥'));
+    });
+
+    // Scroll‐reveal
+    const items = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries, o) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          o.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    items.forEach(el => obs.observe(el));
+
+    // Parallax hero image
+    const heroImg = document.querySelector('.hero-image img');
+    window.addEventListener('scroll', () => {
+      heroImg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+    });
+  </script>
+  <script>  // live status
+    document.addEventListener("DOMContentLoaded", () => {
+      const dot = document.querySelector(".status-dot");
+      const txt = document.querySelector(".status-text");
+      const span = document.querySelector(".players");
+      const API = "https://api.mcsrvstat.us/2/errsa.mc.gg";
+
+      async function update() {
+        try {
+          const res = await fetch(API);
+          const data = await res.json();
+          dot.style.backgroundColor = data.online ? "#0f0" : "#f00";
+          txt.textContent = data.online ? "Online" : "Offline";
+          span.textContent = `Players: ${data.players?.online || 0} / ${data.players?.max || "–"}`;
+        } catch {
+          dot.style.backgroundColor = "#aaa";
+          txt.textContent = "Unknown";
+          span.textContent = "Players: – / –";
+        }
+      } update();
+      setInterval(update, 60000);
+    });</script><script>// Builds slider functionality
+document.addEventListener('DOMContentLoaded', () => {
+  const track   = document.querySelector('.slider-track');
+  const slides  = Array.from(track.children);
+  const prevBtn = document.querySelector('.slider-btn.prev');
+  const nextBtn = document.querySelector('.slider-btn.next');
+  let current   = 0;
+  const visible = window.innerWidth < 768 ? 1 : 3;
+  const maxIdx  = slides.length - visible;
+
+  function updateButtons() {
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current >= maxIdx;
+  }
+
+  function moveTo(idx) {
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    track.style.transform = `translateX(-${slideWidth * idx}px)`;
+    current = idx;
+    updateButtons();
+  }
+
+  prevBtn.addEventListener('click', () => {
+    moveTo(Math.max(0, current - visible));
+  });
+
+  nextBtn.addEventListener('click', () => {
+    moveTo(Math.min(maxIdx, current + visible));
+  });// Initialize buttons state
+  updateButtons();
+});
+</script><script>// Show detail panel when clicking a card
+document.querySelectorAll('.staff-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const detail = document.getElementById('staff-detail');
+    document.getElementById('detail-skin').src =
+      `https://crafatar.com/renders/body/${card.dataset.uuid}?size=256&overlay`;
+    document.getElementById('detail-name').textContent = card.dataset.name;
+    document.getElementById('detail-role').textContent = card.dataset.role;
+    const dc = card.querySelector('a');
+    document.getElementById('detail-discord').textContent = dc.textContent;
+    document.getElementById('detail-discord').href = dc.href;
+    detail.classList.remove('hidden');
+  });
+});
+</script><script>// Close the detail panel
+document.getElementById('close-detail').addEventListener('click', () => {
+  document.getElementById('staff-detail').classList.add('hidden');
+});
+
+const items = document.querySelectorAll('.slide, .update-item, .staff-card');
+  const obs = new IntersectionObserver((entries, o) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        o.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  items.forEach(el => {
+    el.classList.add('reveal');
+    obs.observe(el);
+  });
+const heroImg = document.querySelector('.hero-image img');
+window.addEventListener('scroll', () => {
+  if (!heroImg) return;
+  heroImg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+});
+</script>
 </body>
-
 </html>

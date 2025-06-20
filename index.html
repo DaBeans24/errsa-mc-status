@@ -255,7 +255,7 @@ h3 { font-size: var(--fs-lg); }
     #builds-slider { padding: var(--space-xl) var(--space-xs); }
     #builds-slider .slider { position: relative; }
 #builds-slider .slider-window {
-  overflow: hidden;
+  overflow: visible;
   height: 320px;
 }
 #builds-slider .slider-track {
@@ -275,7 +275,7 @@ h3 { font-size: var(--fs-lg); }
       cursor: pointer;
       z-index:10;
     }
-    .slider-btn.prev { left: var(--space-sm); }
+    .slider-btn.prev { left: calc(var(--space-lg) - var(--space-xs)); }
     .slider-btn.next { right: var(--space-sm); }
     .slide img { loading: lazy; width: 100%;
   height: 100%;
@@ -287,6 +287,7 @@ h3 { font-size: var(--fs-lg); }
   position: relative;
 }
 .caption {
+    display: block;
   position: absolute;
   bottom: var(--space-xxs);
   left: 50%;
@@ -297,6 +298,7 @@ h3 { font-size: var(--fs-lg); }
   color: var(--text-light);
   border-radius: 4px;
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  z-index: 10;
 }
 @media (max-width: 768px) {
   #builds-slider .slide { flex: 0 0 100%; }
@@ -650,7 +652,7 @@ h3 { font-size: var(--fs-lg); }
   <p>Join our community on Discord for real-time help, FAQs, and voice chat:</p>
   <a
     class="btn"
-    href="https://discord.gg/your-invite"
+    href="https://discord.gg/gFcVzV95xt"
     target="_blank"
     rel="noopener"
     aria-label="Join our Discord server for real-time help and chat"

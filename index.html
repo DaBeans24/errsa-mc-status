@@ -199,6 +199,29 @@ h3 { font-size: var(--fs-lg); }
       transform: scale(1.05);
       filter: brightness(1.05);
     }
+    .custom-alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  z-index: 9999;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.custom-alert.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.custom-alert.hidden {
+  display: none;
+}
+
 
   .hero-image {
    
@@ -511,6 +534,8 @@ h3 { font-size: var(--fs-lg); }
   </style>
 </head>
 <body>
+
+<div id="custom-alert" class="custom-alert hidden">IP copied! Launch Minecraft and press CTRL+L to paste 🔥</div>
 
   <header>
     <section class="hero" aria-labelledby="hero-title">
@@ -900,11 +925,32 @@ document.querySelectorAll('.staff-card').forEach(card => {
         if (!ipField) return;
         const ip = ipField.value;
         navigator.clipboard.writeText(ip)
-          .then(() => alert('IP copied! Launch Minecraft and press CTRL+L to paste 🔥'))
-          .catch(() => alert('Failed to copy IP.'));
+          .then(() => showCustomAlert('IP copied! Launch Minecraft and press CTRL+L to paste 🔥'))
+.catch(() => showCustomAlert('Failed to copy IP.'));
+
       });
     }
+function showCustomAlert(message) {
+  const alertBox = document.getElementById('custom-alert');
+  if (!alertBox) return;
 
+  alertBox.textContent = message;
+  alertBox.classList.remove('hidden');
+  alertBox.classList.add('show');
+
+  setTimeout(() => {
+    alertBox.classList.remove('show');
+    setTimeout(() => {
+      alertBox.classList.add('hidden');
+    }, 300); // Allow fade-out transition
+  }, 3000); // Show for 3 seconds
+}
+ document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const panel = document.getElementById('staff-detail');
+          if (panel) panel.classList.add('hidden');
+        }
+      });
     // ── 2) Scroll-reveal for any element with class="reveal" ──────
     const revealItems = document.querySelectorAll('.reveal');
     if (revealItems.length) {

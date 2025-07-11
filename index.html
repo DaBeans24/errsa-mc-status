@@ -920,15 +920,28 @@ document.querySelectorAll('.staff-card').forEach(card => {
     // ── 1) Copy & Play button ─────────────────────────────────────
     const copyBtn = document.getElementById('copy-ip');
     if (copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        const ipField = document.getElementById('server-ip');
-        if (!ipField) return;
-        const ip = ipField.value;
-        navigator.clipboard.writeText(ip)
-          .then(() => showCustomAlert('IP copied! Launch Minecraft and press CTRL+L to paste 🔥'))
-.catch(() => showCustomAlert('Failed to copy IP.'));
+     copyBtn.addEventListener('click', () => {
+  const ipField = document.getElementById('server-ip');
+  if (!ipField) return;
 
-      });
+  // Use fallback if Clipboard API is blocked
+  try {
+    // Create a temporary input to select and copy
+    const tempInput = document.createElement('input');
+    tempInput.style.position = 'absolute';
+    tempInput.style.left = '-9999px';
+    tempInput.value = ipField.value;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+
+    showCustomAlert('IP copied! Launch Minecraft and press CTRL+L to paste 🔥');
+  } catch (err) {
+    showCustomAlert('Failed to copy IP.');
+  }
+});
+
     }
 function showCustomAlert(message) {
   const alertBox = document.getElementById('custom-alert');

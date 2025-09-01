@@ -548,7 +548,7 @@ h3 { font-size: var(--fs-lg); }
         </div>
         <div class="players">Players: – / –</div>
         <div class="ip-box">
-          <input id="server-ip" readonly value="errsa.mc.gg" aria-label="Server IP"/>
+          <input id="server-ip" readonly value="errsa.mc.gg:25588" aria-label="Server IP"/>
           <button id="copy-ip" class="cta-button">Play on ERAU Server</button>
         </div>
       </div>
@@ -620,30 +620,11 @@ h3 { font-size: var(--fs-lg); }
         <div class="slider-window">
           <ul class="slider-track">
             <li class="slide reveal">
-              <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build1.jpg"
+              <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/Build1.jpg"
                    alt="Our Grand Castle at dusk">
-              <p class="caption">Our Grand Castle</p>
+              <p class="caption">Sammy Farms - SammyBammy02</p>
             </li>
-              <li class="slide reveal">
-            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build2.jpg" alt="Suspension Skybridge over ocean">
-             <p class="caption">Suspended Skybridge</p>
-          </li>
-          <li class="slide reveal">
-            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build3.jpg" alt="Central fountain surrounded by garden">
-            <p class="caption">Central Fountain</p>
-          </li>
-           <li class="slide reveal">
-            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build4.jpg" alt="Huge castle created by">
-            <p class="caption">Our Grand Castle</p>
-          </li>
-          <li class="slide reveal">
-            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build5.jpg" alt="">
-            <p class="caption">Suspended Skybridge</p>
-          </li>
-          <li class="slide reveal">
-            <img src="https://raw.githack.com/DaBeans24/errsa-mc-status/main/images/build6.jpg" alt="">
-            <p class="caption">Central Fountain</p>
-          </li>
+             
             <!-- more slides… -->
           </ul>
         </div>
@@ -655,18 +636,19 @@ h3 { font-size: var(--fs-lg); }
     <section id="events-updates" aria-labelledby="updates-title">
       <h2 id="updates-title">Latest Updates</h2>
       <div class="updates">
+          <div class="update-item">
+      <time datetime="2025-09-01" class="update-date">September 1, 2025 Update 1.0.1</time>
+      <p class="update-message">
+        Removed the cost to use <code>/home</code>, enabled stack-based shop options, and added Simple Voice Chat (client-side mod required). Keep the suggestions coming!
+      </p>
+    </div>
         <div class="update-item">
-      <time datetime="2025-06-10" class="update-date">June 10, 2025 Update</time>
+      <time datetime="2025-08-29" class="update-date">August 29, 2025 Update 1.0.0</time>
       <p class="update-message">
-        We’ve patched to Minecraft 1.21.4—new mining loot tables, performance optimizations, and several bug fixes.
+        We’ve launched the ERRSA Minecraft Server — survival SMP; join at errsa.mc.gg and start building with the ERAU community.
       </p>
     </div>
-    <div class="update-item">
-      <time datetime="2025-05-30" class="update-date">May 30, 2025 Update</time>
-      <p class="update-message">
-        The Spring Build Contest is now live! Check out the contest rules in‐game and start building your masterpiece.
-      </p>
-    </div>
+    
     <!-- Add more .update-item blocks here -->
       </div>
     </section>
@@ -857,7 +839,7 @@ h3 { font-size: var(--fs-lg); }
       const dot = document.querySelector(".status-dot");
       const txt = document.querySelector(".status-text");
       const span = document.querySelector(".players");
-      const API = "https://api.mcsrvstat.us/2/errsa.mc.gg";
+      const API = "https://api.mcsrvstat.us/2/errsa.mc.gg:25588";
 
       async function update() {
         try {

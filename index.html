@@ -548,7 +548,7 @@ h3 { font-size: var(--fs-lg); }
         </div>
         <div class="players">Players: – / –</div>
         <div class="ip-box">
-          <input id="server-ip" readonly value="errsa.mc.gg:25588" aria-label="Server IP"/>
+          <input id="server-ip" readonly value="errsa.mc.gg" aria-label="Server IP"/>
           <button id="copy-ip" class="cta-button">Play on ERAU Server</button>
         </div>
       </div>
@@ -839,7 +839,7 @@ h3 { font-size: var(--fs-lg); }
       const dot = document.querySelector(".status-dot");
       const txt = document.querySelector(".status-text");
       const span = document.querySelector(".players");
-      const API = "https://api.mcsrvstat.us/2/errsa.mc.gg:25588";
+      const API = "https://api.mcsrvstat.us/2/errsa.mc.gg";
 
       async function update() {
         try {
